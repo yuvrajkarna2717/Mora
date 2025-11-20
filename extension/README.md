@@ -1,4 +1,4 @@
-# 🌿 Mora — Your Browser Productivity Copilot
+# 🌿 mora — Your Browser Productivity Copilot
 
 <div align="center">
 
@@ -38,9 +38,9 @@
 
 ## ✨ Overview
 
-Mora is a **privacy-first browser productivity copilot** designed to make you more mindful and productive on the web. Unlike other time-tracking tools, Mora keeps all your data **locally** on your device — no servers, no cloud storage, no privacy concerns.
+mora is a **privacy-first browser productivity copilot** designed to make you more mindful and productive on the web. Unlike other time-tracking tools, mora keeps all your data **locally** on your device — no servers, no cloud storage, no privacy concerns.
 
-### 🎯 Why Mora?
+### 🎯 Why mora?
 
 - **🔒 Privacy First**: All data stays on your device
 - **⚡ Lightweight**: Minimal impact on browser performance
@@ -134,14 +134,14 @@ npm run build
 ### Quick Start
 
 1. **Install** the extension
-2. **Pin** Mora to your toolbar for easy access
-3. **Browse** normally - Mora automatically tracks your time
+2. **Pin** mora to your toolbar for easy access
+3. **Browse** normally - mora automatically tracks your time
 4. **Click** the extension icon to view quick stats
 5. **Open** the dashboard for detailed analytics
 
 ### Focus Mode
 
-1. Click the Mora icon
+1. Click the mora icon
 2. Select "Focus Mode"
 3. Choose websites to block
 4. Set duration (15min, 30min, 1hr, custom)
@@ -509,9 +509,9 @@ You have granular control over what gets synced:
 </details>
 
 <details>
-<summary><strong>Does Mora slow down my browser?</strong></summary>
+<summary><strong>Does mora slow down my browser?</strong></summary>
 
-Mora is designed to be lightweight with minimal performance impact. It uses efficient background scripts and only tracks essential data. Cloud sync happens in the background and doesn't affect browsing performance.
+mora is designed to be lightweight with minimal performance impact. It uses efficient background scripts and only tracks essential data. Cloud sync happens in the background and doesn't affect browsing performance.
 </details>
 
 <details>
@@ -523,13 +523,13 @@ Yes! You can export your data in JSON format from the Settings page. CSV export 
 <details>
 <summary><strong>How accurate is the time tracking?</strong></summary>
 
-Mora tracks active tab time and detects when you're idle. It's accurate for active browsing but may not track background tabs. With cloud sync, you get more accurate cross-device insights.
+mora tracks active tab time and detects when you're idle. It's accurate for active browsing but may not track background tabs. With cloud sync, you get more accurate cross-device insights.
 </details>
 
 <details>
-<summary><strong>Can I use Mora on other browsers?</strong></summary>
+<summary><strong>Can I use mora on other browsers?</strong></summary>
 
-Currently, Mora is Chrome-only. Firefox and Safari versions are planned for 2025. Cloud sync will enable seamless data sharing across different browsers once available.
+Currently, mora is Chrome-only. Firefox and Safari versions are planned for 2025. Cloud sync will enable seamless data sharing across different browsers once available.
 </details>
 
 <details>
@@ -582,7 +582,7 @@ MIT License - you can use, modify, and distribute this code freely.
 
 <div align="center">
 
-**🌿 Mora — Your Browser Productivity Copilot**
+**🌿 mora — Your Browser Productivity Copilot**
 
 *"Awareness is the first step toward focus."*
 

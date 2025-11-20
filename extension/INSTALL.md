@@ -1,17 +1,17 @@
-# Mora - Domain Time Tracker Installation
+# mora - Domain Time Tracker Installation
 
 ## Quick Setup
 
 1. **Generate Icons** (one-time setup):
    - Open `create-icons.html` in Chrome
    - It will automatically download 3 icon files
-   - Save them in the Mora folder
+   - Save them in the mora folder
 
 2. **Install Extension**:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" (top right toggle)
    - Click "Load unpacked"
-   - Select the Mora folder
+   - Select the mora folder
 
 3. **Usage**:
    - Pin the extension to your toolbar

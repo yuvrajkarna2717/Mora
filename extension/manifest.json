@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Mora - Domain Time Tracker",
+  "name": "mora - Domain Time Tracker",
   "version": "1.0.0",
   "description": "Track time spent on different domains",
   "permissions": [
@@ -14,7 +14,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Mora Time Tracker"
+    "default_title": "mora Time Tracker"
   },
   "icons": {
     "16": "icon16.png",
