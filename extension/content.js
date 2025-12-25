@@ -2,6 +2,10 @@
 window.addEventListener('message', async (event) => {
   if (event.source !== window || !event.data.type) return;
 
+  if (event.data.type === 'PING_EXTENSION') {
+    window.postMessage({ type: 'PONG_EXTENSION' }, '*');
+  }
+
   if (event.data.type === 'GET_EXTENSION_DATA') {
     try {
       const response = await chrome.runtime.sendMessage({ type: 'GET_DATA' });
