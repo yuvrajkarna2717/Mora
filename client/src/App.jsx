@@ -14,6 +14,7 @@ import GoogleCallback from './pages/GoogleCallback';
 import AuthCallback from './pages/AuthCallback';
 import Stats from './pages/Stats';
 import Backup from './pages/Backup';
+import ExtensionDashboard from './pages/ExtensionDashboard';
 import Dashboard from './pages/Dashboard';
 import Comparison from './pages/Comparison';
 import Exports from './pages/Exports';
@@ -39,7 +40,7 @@ function App() {
             <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/stats" element={<Stats />} />
             <Route path="/backup" element={<Backup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<ExtensionDashboard />} />
             <Route path="/dashboard/comparison" element={<Comparison />} />
             <Route path="/dashboard/exports" element={<Exports />} />
             <Route path="/profile" element={<Profile />} />
