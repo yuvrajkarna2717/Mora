@@ -37,6 +37,25 @@ CREATE TABLE backups (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Feedback submissions table
+CREATE TABLE feedback_submissions (
+    id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    feedback_type ENUM('bug', 'feature', 'feedback') NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    title VARCHAR(500) NOT NULL,
+    description TEXT NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
+    status ENUM('pending', 'resolved', 'closed') DEFAULT 'pending',
+    metadata JSON DEFAULT NULL,  -- Store browser, OS, attachments, etc. as JSON
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_feedback_type (feedback_type),
+    INDEX idx_status (status),
+    INDEX idx_created_at (created_at)
+);
+
 -- Indexes for better performance
 CREATE INDEX idx_usage_data_user_id ON usage_data(user_id);
 CREATE INDEX idx_usage_data_created_at ON usage_data(created_at);

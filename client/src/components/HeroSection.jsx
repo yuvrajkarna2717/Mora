@@ -1,13 +1,11 @@
-// src/components/HeroSection.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { ArrowRight, Check } from "lucide-react";
 
 const HeroSection = () => {
   const features = [
     "Completely free to use",
-    "Track browsing habits", 
-    "Get AI-powered insights"
+    "Track browsing habits",
+    "Get AI-powered insights",
   ];
 
   return (
@@ -16,8 +14,18 @@ const HeroSection = () => {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 mb-8">
           <span className="text-sm text-gray-600">Mora in action</span>
-          <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M7 17L17 7M17 7H7M17 7V17" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+          <svg
+            className="w-4 h-4 text-gray-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path
+              d="M7 17L17 7M17 7H7M17 7V17"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           <div className="bg-white rounded-full p-2 shadow-sm">
             <span className="text-lg">📊</span>
@@ -36,8 +44,9 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-          Monitor your browsing patterns, get AI-powered insights, and improve your focus.
-          Understand where your time goes and make better decisions about your digital habits.
+          Monitor your browsing patterns, get AI-powered insights, and improve
+          your focus. Understand where your time goes and make better decisions
+          about your digital habits.
         </p>
 
         {/* Features List */}
@@ -51,7 +60,7 @@ const HeroSection = () => {
         </div>
 
         {/* CTA Button */}
-        <Link 
+        <Link
           to="/signin"
           className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg hover:shadow-xl"
         >

@@ -5,6 +5,7 @@ const initialState = {
   token: null,
   isAuthenticated: false,
   loading: false,
+  privacyPolicyAccepted: false,
 };
 
 const authSlice = createSlice({
@@ -34,9 +35,12 @@ const authSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload;
+    },
+    setPrivacyPolicyAccepted: (state, action) => {
+      state.privacyPolicyAccepted = action.payload;
     }
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout, setUser } = authSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout, setUser, setPrivacyPolicyAccepted } = authSlice.actions;
 export default authSlice.reducer;
