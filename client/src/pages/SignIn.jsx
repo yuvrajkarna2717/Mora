@@ -29,7 +29,7 @@ const SignIn = () => {
 
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen bg-amber-50 flex items-center justify-center mt-60 px-6 pb-12">
+      <div className="min-h-screen bg-amber-50 flex items-center justify-center pt-30 px-6 pb-12">
         <div className="max-w-2xl w-full">
           {/* Welcome Card */}
           <div className="bg-white rounded-2xl p-8 sm:p-12 border-2 border-gray-900 shadow-xl mb-6">

@@ -1,115 +1,312 @@
 import { useState } from "react";
-import { Bell, Trash2, Link as LinkIcon } from "lucide-react";
+import {
+  Bell,
+  Trash2,
+  Link as LinkIcon,
+  Settings as SettingsIcon,
+  Shield,
+  Globe,
+  Moon,
+  Sun,
+  Zap,
+  Download,
+  Database,
+  CheckCircle,
+  AlertCircle,
+  Eye,
+  EyeOff,
+  Mail,
+} from "lucide-react";
 
 const Settings = () => {
   const [notifications, setNotifications] = useState({
     email: true,
     push: false,
     weekly: true,
+    dailyReminder: true,
+    insights: true,
   });
 
+  const [preferences, setPreferences] = useState({
+    darkMode: false,
+    autoBackup: true,
+    anonymousData: false,
+  });
+
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  const handleDeleteAccount = () => {
+    if (
+      window.confirm(
+        "Are you absolutely sure? This action cannot be undone. All your data will be permanently deleted."
+      )
+    ) {
+      // Delete account logic
+      console.log("Deleting account...");
+    }
+  };
+
+  const ToggleSwitch = ({ checked, onChange }) => (
+    <button
+      onClick={onChange}
+      className={`relative w-14 h-7 rounded-full transition-all duration-300 border-2 border-gray-900 shadow-md \${
+        checked ? "bg-gradient-to-r from-amber-400 to-orange-400" : "bg-gray-300"
+      }`}
+    >
+      <span
+        className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 border-2 border-gray-900 shadow-sm \${
+          checked ? "translate-x-7" : "translate-x-0"
+        }`}
+      />
+    </button>
+  );
+
   return (
-    <div className="min-h-screen py-8 px-4">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-amber-50 pb-8 pt-30 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold font-heading mb-2">Settings</h1>
-          <p className="text-gray-600">Customize your mora experience</p>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
+              <SettingsIcon className="w-6 h-6 text-gray-900" />
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-black text-gray-900">
+              Settings
+            </h1>
+          </div>
+          <p className="text-lg text-gray-600 font-semibold ml-15">
+            Customize your Mora experience, Yuvraj
+          </p>
         </div>
 
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Bell className="w-5 h-5" />
-            <h3 className="text-xl font-semibold">Notifications</h3>
+        {/* Account Info Card */}
+        <div className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-6 mb-6 border-2 border-gray-900 shadow-xl">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl font-black border-2 border-gray-900 shadow-md">
+              Y
+            </div>
+            <div>
+              <p className="text-xl font-black text-gray-900">Yuvraj Karna</p>
+              <p className="text-sm font-bold text-gray-800">
+                Engineering • Paris 🇫🇷
+              </p>
+              <p className="text-xs font-semibold text-gray-700 mt-1">
+                yuvraj@mora.app
+              </p>
+            </div>
           </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
+        </div>
+
+        {/* Notifications Section */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-100">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
+              <Bell className="w-5 h-5 text-gray-900" />
+            </div>
+            <h3 className="text-2xl font-black text-gray-900">Notifications</h3>
+          </div>
+
+          <div className="space-y-6">
+            <div className="flex items-center justify-between p-4 bg-amber-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
               <div>
-                <p className="font-medium mb-1">Email Notifications</p>
-                <p className="text-sm text-gray-600">
+                <div className="flex items-center gap-2 mb-1">
+                  <Mail className="w-4 h-4 text-amber-600" />
+                  <p className="font-black text-gray-900">
+                    Email Notifications
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
                   Receive productivity reports via email
                 </p>
               </div>
-              <button
-                onClick={() =>
+              <ToggleSwitch
+                checked={notifications.email}
+                onChange={() =>
                   setNotifications({
                     ...notifications,
                     email: !notifications.email,
                   })
                 }
-                className={`relative w-14 h-7 rounded-full transition-colors ${
-                  notifications.email ? "bg-gray-900" : "bg-gray-300"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform ${
-                    notifications.email ? "translate-x-7" : "translate-x-0"
-                  }`}
-                />
-              </button>
+              />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-4 bg-amber-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
               <div>
-                <p className="font-medium mb-1">Push Notifications</p>
-                <p className="text-sm text-gray-600">
+                <div className="flex items-center gap-2 mb-1">
+                  <Zap className="w-4 h-4 text-blue-600" />
+                  <p className="font-black text-gray-900">Push Notifications</p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
                   Get real-time alerts in your browser
                 </p>
               </div>
-              <button
-                onClick={() =>
+              <ToggleSwitch
+                checked={notifications.push}
+                onChange={() =>
                   setNotifications({
                     ...notifications,
                     push: !notifications.push,
                   })
                 }
-                className={`relative w-14 h-7 rounded-full transition-colors ${
-                  notifications.push ? "bg-gray-900" : "bg-gray-300"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform ${
-                    notifications.push ? "translate-x-7" : "translate-x-0"
-                  }`}
-                />
-              </button>
+              />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-4 bg-amber-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
               <div>
-                <p className="font-medium mb-1">Weekly Summary</p>
-                <p className="text-sm text-gray-600">
+                <div className="flex items-center gap-2 mb-1">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <p className="font-black text-gray-900">Weekly Summary</p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
                   Receive weekly productivity summaries
                 </p>
               </div>
-              <button
-                onClick={() =>
+              <ToggleSwitch
+                checked={notifications.weekly}
+                onChange={() =>
                   setNotifications({
                     ...notifications,
                     weekly: !notifications.weekly,
                   })
                 }
-                className={`relative w-14 h-7 rounded-full transition-colors ${
-                  notifications.weekly ? "bg-gray-900" : "bg-gray-300"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full transition-transform ${
-                    notifications.weekly ? "translate-x-7" : "translate-x-0"
-                  }`}
-                />
-              </button>
+              />
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-amber-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Bell className="w-4 h-4 text-purple-600" />
+                  <p className="font-black text-gray-900">Daily Reminder</p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
+                  Daily focus reminders at 9 AM Paris time
+                </p>
+              </div>
+              <ToggleSwitch
+                checked={notifications.dailyReminder}
+                onChange={() =>
+                  setNotifications({
+                    ...notifications,
+                    dailyReminder: !notifications.dailyReminder,
+                  })
+                }
+              />
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-amber-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Zap className="w-4 h-4 text-amber-600" />
+                  <p className="font-black text-gray-900">AI Insights</p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
+                  Get personalized AI-powered productivity tips
+                </p>
+              </div>
+              <ToggleSwitch
+                checked={notifications.insights}
+                onChange={() =>
+                  setNotifications({
+                    ...notifications,
+                    insights: !notifications.insights,
+                  })
+                }
+              />
             </div>
           </div>
         </div>
 
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <LinkIcon className="w-5 h-5" />
-            <h3 className="text-xl font-semibold">Connected Accounts</h3>
+        {/* Preferences Section */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-100">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
+              <Globe className="w-5 h-5 text-gray-900" />
+            </div>
+            <h3 className="text-2xl font-black text-gray-900">Preferences</h3>
           </div>
-          <div className="p-4 rounded-lg flex items-center justify-between bg-gray-50">
-            <div className="flex items-center gap-3">
-              <svg className="w-8 h-8" viewBox="0 0 24 24">
+
+          <div className="space-y-6">
+            <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Moon className="w-4 h-4 text-blue-600" />
+                  <p className="font-black text-gray-900">Dark Mode</p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
+                  Enable dark theme for late night coding in Paris
+                </p>
+              </div>
+              <ToggleSwitch
+                checked={preferences.darkMode}
+                onChange={() =>
+                  setPreferences({
+                    ...preferences,
+                    darkMode: !preferences.darkMode,
+                  })
+                }
+              />
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Database className="w-4 h-4 text-green-600" />
+                  <p className="font-black text-gray-900">Auto Backup</p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
+                  Automatically backup your data to cloud daily
+                </p>
+              </div>
+              <ToggleSwitch
+                checked={preferences.autoBackup}
+                onChange={() =>
+                  setPreferences({
+                    ...preferences,
+                    autoBackup: !preferences.autoBackup,
+                  })
+                }
+              />
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Shield className="w-4 h-4 text-purple-600" />
+                  <p className="font-black text-gray-900">
+                    Anonymous Analytics
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600 font-semibold">
+                  Help improve Mora by sharing anonymous usage data
+                </p>
+              </div>
+              <ToggleSwitch
+                checked={preferences.anonymousData}
+                onChange={() =>
+                  setPreferences({
+                    ...preferences,
+                    anonymousData: !preferences.anonymousData,
+                  })
+                }
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Connected Accounts */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-100">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
+              <LinkIcon className="w-5 h-5 text-gray-900" />
+            </div>
+            <h3 className="text-2xl font-black text-gray-900">
+              Connected Accounts
+            </h3>
+          </div>
+
+          <div className="p-5 rounded-xl flex items-center justify-between bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md">
+            <div className="flex items-center gap-4">
+              <svg className="w-12 h-12" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -128,28 +325,177 @@ const Settings = () => {
                 />
               </svg>
               <div>
-                <p className="font-medium">Google Account</p>
-                <p className="text-sm text-gray-600">Connected</p>
+                <p className="font-black text-gray-900 text-lg">
+                  Google Account
+                </p>
+                <p className="text-sm text-gray-600 font-semibold">
+                  yuvraj@mora.app
+                </p>
+                <div className="flex items-center gap-2 mt-1">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <span className="text-xs font-bold text-green-600">
+                    Connected
+                  </span>
+                </div>
               </div>
             </div>
-            <button className="px-4 py-2 rounded-lg font-medium bg-red-50 text-red-600 hover:bg-red-100 transition-colors">
+            <button className="px-5 py-2.5 rounded-lg font-bold bg-white hover:bg-red-50 text-red-600 border-2 border-red-600 transition-all shadow-md hover:shadow-lg">
               Disconnect
             </button>
           </div>
         </div>
 
-        <div className="p-6 rounded-xl border-2 bg-red-50 border-red-200">
-          <div className="flex items-center gap-2 mb-4">
-            <Trash2 className="w-5 h-5 text-red-500" />
-            <h3 className="text-xl font-semibold text-red-500">Danger Zone</h3>
+        {/* Data Management */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-100">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
+              <Download className="w-5 h-5 text-gray-900" />
+            </div>
+            <h3 className="text-2xl font-black text-gray-900">
+              Data Management
+            </h3>
           </div>
-          <p className="mb-4 text-gray-700">
-            Once you delete your account, there is no going back. Please be
-            certain.
+
+          <p className="text-sm text-gray-600 font-semibold mb-6">
+            Export or manage your Mora data. You have full control over your
+            information.
           </p>
-          <button className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors">
-            Delete Account
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <button className="p-5 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+                  <Download className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="font-black text-gray-900">Export Data</p>
+                  <p className="text-xs text-gray-600 font-semibold">
+                    Download as JSON
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 font-medium">
+                Download all your browsing data and insights
+              </p>
+            </button>
+
+            <button className="p-5 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-purple-400 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+                  <Database className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="font-black text-gray-900">View Data</p>
+                  <p className="text-xs text-gray-600 font-semibold">
+                    See what we store
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 font-medium">
+                Review all data stored about you
+              </p>
+            </button>
+          </div>
+        </div>
+
+        {/* Danger Zone */}
+        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 sm:p-8 border-2 border-red-600 shadow-xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center border-2 border-gray-900">
+              <Trash2 className="w-5 h-5 text-white" />
+            </div>
+            <h3 className="text-2xl font-black text-red-600">Danger Zone</h3>
+          </div>
+
+          <div className="bg-white rounded-xl p-5 border-2 border-red-600 mb-4">
+            <div className="flex items-start gap-3 mb-4">
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-black text-gray-900 mb-2">
+                  Delete Your Account
+                </p>
+                <p className="text-sm text-gray-700 font-semibold leading-relaxed">
+                  Once you delete your account, there is no going back. This
+                  will permanently delete:
+                </p>
+                <ul className="mt-3 space-y-2">
+                  <li className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                    All your browsing history and data
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                    AI insights and productivity reports
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                    Your account settings and preferences
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                    All backups and exports
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {!showDeleteConfirm ? (
+            <button
+              onClick={() => setShowDeleteConfirm(true)}
+              className="w-full sm:w-auto px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl transition-all shadow-lg hover:shadow-xl border-2 border-gray-900 flex items-center justify-center gap-2"
+            >
+              <Trash2 className="w-5 h-5" />
+              Delete My Account
+            </button>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-sm font-bold text-red-600 mb-3">
+                ⚠️ Are you absolutely sure? This action cannot be undone!
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleDeleteAccount}
+                  className="flex-1 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl transition-all shadow-lg border-2 border-gray-900"
+                >
+                  Yes, Delete Forever
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  className="flex-1 px-6 py-3 bg-white hover:bg-gray-50 text-gray-900 font-black rounded-xl transition-all shadow-md border-2 border-gray-900"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Save Changes Button */}
+        <div className="mt-8 bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl p-6 border-2 border-gray-900 shadow-xl text-center">
+          <button className="w-full sm:w-auto px-12 py-4 bg-gray-900 hover:bg-gray-800 text-amber-50 font-black text-lg rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-3 mx-auto">
+            <CheckCircle className="w-6 h-6" />
+            Save All Changes
           </button>
+          <p className="text-sm font-semibold text-gray-800 mt-3">
+            Your settings are automatically saved
+          </p>
+        </div>
+
+        {/* Footer Info */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-600 font-semibold">
+            Need help? Contact us at{" "}
+            <a
+              href="mailto:support@mora.app"
+              className="text-amber-600 hover:text-amber-700 font-bold underline"
+            >
+              support@mora.app
+            </a>
+          </p>
+          <p className="text-xs text-gray-500 font-medium mt-2">
+            Built with ❤️ in Paris 🇫🇷 • Last updated: December 27, 2025
+          </p>
         </div>
       </div>
     </div>
