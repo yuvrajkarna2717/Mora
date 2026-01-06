@@ -148,6 +148,7 @@ function showNotification(message) {
 }
 
 const API_BASE = "http://localhost:3001";
+const UI_BASE = "http://localhost:5173";
 
 async function getAuthToken() {
   const result = await chrome.storage.local.get(["authToken"]);
@@ -183,65 +184,11 @@ async function isAuthenticated() {
 }
 
 async function handleDetailedStats() {
-  const authenticated = await isAuthenticated();
-
-  if (!authenticated) {
-    // Show authentication required message
-    if (confirm("You need to sign in to view detailed stats. Sign in now?")) {
-      chrome.tabs.create({ url: `http://localhost:5173/signin` });
-    }
-    return;
-  }
-
-  chrome.tabs.create({ url: `http://localhost:5173/extension-dashboard` });
+  chrome.tabs.create({ url: `${UI_BASE}/signin?redirect=/dashboard` });
 }
 
 async function handleBackupData() {
-  const authenticated = await isAuthenticated();
-
-  if (!authenticated) {
-    if (confirm("You need to sign in to backup data to cloud. Sign in now?")) {
-      chrome.tabs.create({ url: `http://localhost:5173/signin` });
-    }
-    return;
-  }
-
-  // Get all data
-  const allData = await chrome.storage.local.get();
-  const token = await getAuthToken();
-
-  // Show loading state
-  const backupBtn = document.getElementById("backupData");
-  const originalText = backupBtn.innerHTML;
-  backupBtn.innerHTML = '<span class="btn-icon">⏳</span> Backing up...';
-  backupBtn.disabled = true;
-
-  try {
-    const response = await fetch(`${API_BASE}/api/backup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        data: allData,
-        timestamp: new Date().toISOString(),
-        device: "chrome-extension",
-      }),
-    });
-
-    if (response.ok) {
-      showNotification("☁️ Data backed up successfully!");
-    } else {
-      throw new Error("Backup failed");
-    }
-  } catch (error) {
-    console.error("Backup error:", error);
-    showNotification("❌ Backup failed. Please try again.");
-  } finally {
-    backupBtn.innerHTML = originalText;
-    backupBtn.disabled = false;
-  }
+  chrome.tabs.create({ url: `${UI_BASE}/signin?redirect=/backup` });
 }
 
 // Auto-refresh data every 5 seconds when popup is open
