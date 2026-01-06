@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 import { logout } from "../store/authSlice";
 import {
   LogOut,
@@ -17,9 +18,21 @@ const SignIn = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Auto-redirect authenticated users
+  useEffect(() => {
+    if (isAuthenticated) {
+      const redirect = searchParams.get("redirect") || "/dashboard";
+      navigate(redirect);
+    }
+  }, [isAuthenticated, navigate, searchParams]);
 
   const handleGoogleSignIn = () => {
-    window.location.href = "http://localhost:3001/auth/google";
+    const redirect = searchParams.get("redirect") || "/dashboard";
+    window.location.href = `${VITE_API_URL}/auth/google?redirect=${encodeURIComponent(
+      redirect
+    )}`;
   };
 
   const handleLogout = () => {

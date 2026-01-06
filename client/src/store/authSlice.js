@@ -31,7 +31,11 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.token = null;
+      state.privacyPolicyAccepted = false;
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      // Notify other tabs
+      localStorage.setItem('logout', Date.now().toString());
     },
     setUser: (state, action) => {
       state.user = action.payload;

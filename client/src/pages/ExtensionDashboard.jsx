@@ -295,7 +295,7 @@ const ExtensionDashboard = () => {
       }
 
       const response = await fetch(
-        "http://localhost:3001/api/insights/generate",
+        `${VITE_API_URL}/api/insights/generate`,
         {
           method: "POST",
           headers: {

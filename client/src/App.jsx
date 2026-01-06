@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PrivacyPolicyGuard from "./components/PrivacyPolicyGuard";
+import ProtectedRoute from "./components/ProtectedRoute";
 import AuthInitializer from "./components/AuthInitializer";
 import LandingPage from "./pages/LandingPage";
 import FeedbackPage from "./pages/FeedbackPage";
@@ -42,21 +43,39 @@ function App() {
               <Route
                 path="/dashboard"
                 element={
-                  <PrivacyPolicyGuard>
-                    <ExtensionDashboard />
-                  </PrivacyPolicyGuard>
+                  <ProtectedRoute>
+                    <PrivacyPolicyGuard>
+                      <ExtensionDashboard />
+                    </PrivacyPolicyGuard>
+                  </ProtectedRoute>
                 }
               />
               <Route
                 path="/backup"
                 element={
-                  <PrivacyPolicyGuard>
-                    <BackupPage />
-                  </PrivacyPolicyGuard>
+                  <ProtectedRoute>
+                    <PrivacyPolicyGuard>
+                      <BackupPage />
+                    </PrivacyPolicyGuard>
+                  </ProtectedRoute>
                 }
               />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route 
+                path="/profile" 
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/settings" 
+                element={
+                  <ProtectedRoute>
+                    <Settings />
+                  </ProtectedRoute>
+                } 
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />

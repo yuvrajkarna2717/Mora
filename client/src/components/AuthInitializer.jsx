@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../store/authSlice';
+import { loginSuccess, logout } from '../store/authSlice';
 
 const AuthInitializer = ({ children }) => {
   const dispatch = useDispatch();
@@ -19,6 +19,16 @@ const AuthInitializer = ({ children }) => {
         localStorage.removeItem('user');
       }
     }
+
+    // Listen for logout events from other tabs
+    const handleStorageChange = (e) => {
+      if (e.key === 'logout') {
+        dispatch(logout());
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, [dispatch]);
 
   return children;
