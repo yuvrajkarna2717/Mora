@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3001/auth/google/callback",
+      callbackURL: `${process.env.API_URL}/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -64,7 +64,7 @@ router.get("/google", (req, res, next) => {
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: `${process.env.CLIENT_URL}/login`,
+    failureRedirect: `${process.env.CLIENT_URL}/signin`,
   }),
   (req, res) => {
     try {
@@ -84,10 +84,13 @@ router.get(
       );
 
       const redirectUrl = `${process.env.CLIENT_URL}/auth/callback?token=${token}&user=${userParam}&redirect=${redirect}`;
+      console.log('Redirecting to:', redirectUrl);
 
-      res.redirect(redirectUrl);
+      res.writeHead(302, { Location: redirectUrl });
+      res.end();
     } catch (error) {
-      res.redirect(`${process.env.CLIENT_URL}/login?error=callback_failed`);
+      console.error('Callback error:', error);
+      res.redirect(`${process.env.CLIENT_URL}/signin?error=callback_failed`);
     }
   }
 );
