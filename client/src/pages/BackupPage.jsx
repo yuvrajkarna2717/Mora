@@ -253,7 +253,7 @@ const BackupPage = () => {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-400 rounded-2xl mb-6 border-2 border-gray-900 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-amber-400 to-orange-400 rounded-2xl mb-6 border-2 border-gray-900 shadow-lg">
             <Cloud className="w-8 h-8 text-gray-900" />
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4">
@@ -304,7 +304,7 @@ const BackupPage = () => {
           {backupStatus === "idle" && (
             <>
               <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-blue-400 to-blue-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
                   <Upload className="w-10 h-10 text-white" />
                 </div>
                 <h2 className="text-3xl font-black text-gray-900 mb-3">
@@ -318,7 +318,7 @@ const BackupPage = () => {
               </div>
 
               <div className="grid md:grid-cols-3 gap-4 mb-8">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl border-2 border-gray-900">
+                <div className="bg-linear-to-br from-green-50 to-emerald-50 p-5 rounded-xl border-2 border-gray-900">
                   <Shield className="w-8 h-8 text-green-600 mb-3" />
                   <p className="font-black text-gray-900 mb-1">Encrypted</p>
                   <p className="text-sm text-gray-700 font-semibold">
@@ -326,7 +326,7 @@ const BackupPage = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border-2 border-gray-900">
+                <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-5 rounded-xl border-2 border-gray-900">
                   <Zap className="w-8 h-8 text-blue-600 mb-3" />
                   <p className="font-black text-gray-900 mb-1">Fast Upload</p>
                   <p className="text-sm text-gray-700 font-semibold">
@@ -334,7 +334,7 @@ const BackupPage = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-xl border-2 border-gray-900">
+                <div className="bg-linear-to-br from-purple-50 to-pink-50 p-5 rounded-xl border-2 border-gray-900">
                   <Archive className="w-8 h-8 text-purple-600 mb-3" />
                   <p className="font-black text-gray-900 mb-1">
                     Version History
@@ -347,7 +347,7 @@ const BackupPage = () => {
 
               <button
                 onClick={handleBackup}
-                className="w-full py-5 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 hover:scale-105 flex items-center justify-center gap-3"
+                className="w-full py-5 bg-linear-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 hover:scale-105 flex items-center justify-center gap-3"
               >
                 <Cloud className="w-6 h-6" />
                 Backup to Cloud Now
@@ -358,7 +358,7 @@ const BackupPage = () => {
 
           {backupStatus === "uploading" && (
             <div className="text-center py-12">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg animate-pulse">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-blue-400 to-blue-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg animate-pulse">
                 <Loader className="w-10 h-10 text-white animate-spin" />
               </div>
               <h2 className="text-3xl font-black text-gray-900 mb-3">
@@ -370,7 +370,7 @@ const BackupPage = () => {
               </p>
               <div className="max-w-md mx-auto">
                 <div className="w-full h-3 bg-gray-200 rounded-full border-2 border-gray-900 overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-amber-400 to-orange-400 rounded-full animate-pulse"></div>
+                  <div className="h-full bg-linear-to-r from-amber-400 to-orange-400 rounded-full animate-pulse"></div>
                 </div>
               </div>
             </div>
@@ -378,7 +378,7 @@ const BackupPage = () => {
 
           {backupStatus === "success" && (
             <div className="text-center py-12">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg animate-bounce">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-green-400 to-green-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg animate-bounce">
                 <CheckCircle className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-black text-gray-900 mb-3">
@@ -389,7 +389,7 @@ const BackupPage = () => {
               </p>
 
               {backupData && (
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-gray-900 max-w-md mx-auto">
+                <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-gray-900 max-w-md mx-auto">
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
                       <p className="text-2xl font-black text-gray-900">
@@ -417,7 +417,7 @@ const BackupPage = () => {
 
           {backupStatus === "error" && (
             <div className="text-center py-12">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-red-400 to-red-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
                 <AlertCircle className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-black text-gray-900 mb-3">
@@ -450,7 +450,7 @@ const BackupPage = () => {
               Enable automatic daily backups at 3 AM Paris time. Never lose your
               data again!
             </p>
-            <button className="w-full px-6 py-3 bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 text-white rounded-xl font-bold transition-all border-2 border-gray-900 shadow-md hover:shadow-lg">
+            <button className="w-full px-6 py-3 bg-linear-to-br from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 text-white rounded-xl font-bold transition-all border-2 border-gray-900 shadow-md hover:shadow-lg">
               Enable Auto Backup
             </button>
           </div>
@@ -469,7 +469,7 @@ const BackupPage = () => {
               Download your latest cloud backup as a JSON file to your local
               machine.
             </p>
-            <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white rounded-xl font-bold transition-all border-2 border-gray-900 shadow-md hover:shadow-lg">
+            <button className="w-full px-6 py-3 bg-linear-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white rounded-xl font-bold transition-all border-2 border-gray-900 shadow-md hover:shadow-lg">
               Download Latest Backup
             </button>
           </div>
@@ -488,7 +488,7 @@ const BackupPage = () => {
 
           {lastBackup ? (
             <div className="space-y-3">
-              <div className="flex items-center justify-between p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border-2 border-gray-900">
+              <div className="flex items-center justify-between p-4 bg-linear-to-br from-amber-50 to-orange-50 rounded-xl border-2 border-gray-900">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center border-2 border-gray-900 shadow-md">
                     <CheckCircle className="w-6 h-6 text-white" />
@@ -526,7 +526,7 @@ const BackupPage = () => {
         {/* Info Cards */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Security Info */}
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+          <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
             <div className="flex items-center gap-3 mb-4">
               <Shield className="w-8 h-8 text-green-600" />
               <h3 className="text-xl font-black text-gray-900">
@@ -535,45 +535,45 @@ const BackupPage = () => {
             </div>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                 <span>End-to-end AES-256 encryption</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                 <span>Stored in secure Paris 🇫🇷 data centers</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                 <span>GDPR compliant and privacy-focused</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                 <span>Only you can access your backups</span>
               </li>
             </ul>
           </div>
 
           {/* Features Info */}
-          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+          <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
             <div className="flex items-center gap-3 mb-4">
               <Zap className="w-8 h-8 text-blue-600" />
               <h3 className="text-xl font-black text-gray-900">Why Backup?</h3>
             </div>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <TrendingUp className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <TrendingUp className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <span>Access your data from any device</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <TrendingUp className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <TrendingUp className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <span>Never lose your productivity history</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <TrendingUp className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <TrendingUp className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <span>Restore data after reinstalling</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700 font-semibold">
-                <TrendingUp className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <TrendingUp className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <span>Keep unlimited version history</span>
               </li>
             </ul>

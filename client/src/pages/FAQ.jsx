@@ -106,7 +106,7 @@ const FAQ = () => {
                   {faq.question}
                 </h3>
                 <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full bg-amber-100 border-2 border-gray-900 flex items-center justify-center transition-transform duration-300 ${
+                  className={`shrink-0 w-8 h-8 rounded-full bg-amber-100 border-2 border-gray-900 flex items-center justify-center transition-transform duration-300 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 >
@@ -132,7 +132,7 @@ const FAQ = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-8 sm:p-12 border-2 border-gray-900 shadow-xl text-center">
+        <div className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-8 sm:p-12 border-2 border-gray-900 shadow-xl text-center">
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
             Still have questions?
           </h2>

@@ -15,11 +15,11 @@ const NotFound = () => {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <Link
-          to="/"
+          to="/dashboard"
           className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all"
         >
           <Home className="w-5 h-5" />
-          Back to Home
+          Back to Dashboard
         </Link>
       </div>
     </div>

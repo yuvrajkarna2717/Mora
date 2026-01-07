@@ -32,7 +32,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center gap-2 text-xl font-bold text-gray-900 hover:scale-105 transition-transform group"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-md group-hover:shadow-lg transition-all">
+            <div className="w-10 h-10 bg-linear-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-md group-hover:shadow-lg transition-all">
               <span className="text-xl">📊</span>
             </div>
             <span className="text-2xl font-black">Mora</span>
@@ -46,6 +46,15 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-gray-900 font-bold transition-colors relative group"
               >
                 Dashboard
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all group-hover:w-full"></span>
+              </Link>
+            )}
+            {isAuthenticated && (
+              <Link
+                to="/backup"
+                className="text-gray-700 hover:text-gray-900 font-bold transition-colors relative group"
+              >
+                Backup
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all group-hover:w-full"></span>
               </Link>
             )}
@@ -82,7 +91,7 @@ const Navbar = () => {
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                   className="flex items-center gap-3 px-4 py-2.5 bg-white hover:bg-gray-50 rounded-xl border-2 border-gray-900 shadow-md hover:shadow-lg transition-all group"
                 >
-                  <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-sm border-2 border-gray-900 shadow-sm">
+                  <div className="w-9 h-9 bg-linear-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-sm border-2 border-gray-900 shadow-sm">
                     {user?.name?.charAt(0).toUpperCase() || "Y"}
                   </div>
                   <div className="text-left">
@@ -100,7 +109,7 @@ const Navbar = () => {
                 {/* Dropdown Menu */}
                 {profileDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl border-2 border-gray-900 shadow-xl overflow-hidden animate-fadeIn">
-                    <div className="bg-gradient-to-br from-amber-400 to-orange-400 px-4 py-3 border-b-2 border-gray-900">
+                    <div className="bg-linear-to-br from-amber-400 to-orange-400 px-4 py-3 border-b-2 border-gray-900">
                       <p className="text-sm font-black text-gray-900">
                         {user?.name || "Yuvraj Karna"}
                       </p>
@@ -156,7 +165,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/signin"
-                className="px-6 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black transition-all duration-300 shadow-md hover:shadow-xl border-2 border-gray-900 hover:scale-105"
+                className="px-6 py-2.5 bg-linear-to-br from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black transition-all duration-300 shadow-md hover:shadow-xl border-2 border-gray-900 hover:scale-105"
               >
                 Sign In
               </Link>
@@ -216,7 +225,7 @@ const Navbar = () => {
 
             {isAuthenticated ? (
               <div className="space-y-3 pt-3 border-t-2 border-amber-200">
-                <div className="flex items-center gap-3 px-4 py-4 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl border-2 border-gray-900 shadow-lg">
+                <div className="flex items-center gap-3 px-4 py-4 bg-linear-to-br from-amber-400 to-orange-400 rounded-xl border-2 border-gray-900 shadow-lg">
                   <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-900 font-black text-lg border-2 border-gray-900 shadow-md">
                     {user?.name?.charAt(0).toUpperCase() || "Y"}
                   </div>
@@ -250,7 +259,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/signin"
-                className="block w-full px-6 py-4 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black transition-all duration-300 shadow-lg text-center border-2 border-gray-900"
+                className="block w-full px-6 py-4 bg-linear-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black transition-all duration-300 shadow-lg text-center border-2 border-gray-900"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Sign In

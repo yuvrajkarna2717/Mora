@@ -124,7 +124,7 @@ const FeedbackPage = () => {
       <div className="min-h-screen bg-amber-50 flex items-center justify-center px-6 py-12">
         <div className="max-w-2xl w-full">
           <div className="bg-white rounded-2xl p-12 border-2 border-gray-900 shadow-xl text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg animate-bounce">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-green-400 to-green-600 rounded-full mb-6 border-2 border-gray-900 shadow-lg animate-bounce">
               <CheckCircle className="w-10 h-10 text-white" />
             </div>
             <h2 className="text-4xl font-black text-gray-900 mb-4">
@@ -139,7 +139,7 @@ const FeedbackPage = () => {
                 : "feedback"}{" "}
               has been received successfully!
             </p>
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-gray-900 mb-6">
+            <div className="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-gray-900 mb-6">
               <p className="text-sm font-bold text-gray-900 mb-2">
                 What happens next?
               </p>
@@ -154,7 +154,7 @@ const FeedbackPage = () => {
             </div>
             <button
               onClick={() => setSubmitted(false)}
-              className="px-8 py-3 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900"
+              className="px-8 py-3 bg-linear-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900"
             >
               Submit Another
             </button>
@@ -169,7 +169,7 @@ const FeedbackPage = () => {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-400 rounded-2xl mb-6 border-2 border-gray-900 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-amber-400 to-orange-400 rounded-2xl mb-6 border-2 border-gray-900 shadow-lg">
             <Sparkles className="w-8 h-8 text-gray-900" />
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4">
@@ -189,13 +189,13 @@ const FeedbackPage = () => {
               onClick={() => setFeedbackType(type.id)}
               className={`relative p-6 rounded-2xl border-2 transition-all duration-300 ${
                 feedbackType === type.id
-                  ? "border-gray-900 shadow-xl scale-105 bg-gradient-to-br " +
+                  ? "border-gray-900 shadow-xl scale-105 bg-linear-to-br " +
                     type.bgColor
                   : "border-gray-900 shadow-lg hover:shadow-xl bg-white hover:scale-102"
               }`}
             >
               <div
-                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${type.color} flex items-center justify-center mb-4 border-2 border-gray-900 shadow-md mx-auto`}
+                className={`w-12 h-12 rounded-xl bg-linear-to-br ${type.color} flex items-center justify-center mb-4 border-2 border-gray-900 shadow-md mx-auto`}
               >
                 <type.icon className="w-6 h-6 text-white" />
               </div>
@@ -217,7 +217,7 @@ const FeedbackPage = () => {
         {/* Main Form */}
         <div className="bg-white rounded-2xl p-8 border-2 border-gray-900 shadow-xl">
           <div
-            className={`bg-gradient-to-br ${selectedType.bgColor} rounded-xl p-6 mb-8 border-2 border-gray-900`}
+            className={`bg-linear-to-br ${selectedType.bgColor} rounded-xl p-6 mb-8 border-2 border-gray-900`}
           >
             <div className="flex items-center gap-3 mb-3">
               <selectedType.icon className="w-6 h-6 text-gray-900" />
@@ -367,7 +367,7 @@ const FeedbackPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
+              className="w-full flex items-center justify-center gap-3 py-4 px-6 bg-linear-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
             >
               {loading ? (
                 <>
@@ -390,7 +390,7 @@ const FeedbackPage = () => {
         </div>
 
         {/* Additional Contact Methods */}
-        <div className="mt-8 bg-gradient-to-br from-purple-50 via-blue-50 to-amber-50 rounded-2xl p-8 border-2 border-gray-900 shadow-lg">
+        <div className="mt-8 bg-linear-to-br from-purple-50 via-blue-50 to-amber-50 rounded-2xl p-8 border-2 border-gray-900 shadow-lg">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-black text-gray-900 mb-2">
               Other Ways to Reach Us
@@ -405,7 +405,7 @@ const FeedbackPage = () => {
               href="mailto:feedback@mora.app"
               className="flex items-center justify-center gap-3 bg-white hover:bg-amber-50 p-5 rounded-xl border-2 border-gray-900 shadow-md hover:shadow-lg transition-all group"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-red-400 to-pink-500 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 bg-linear-to-br from-red-400 to-pink-500 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                 <Mail className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -422,7 +422,7 @@ const FeedbackPage = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 bg-white hover:bg-amber-50 p-5 rounded-xl border-2 border-gray-900 shadow-md hover:shadow-lg transition-all group"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 bg-linear-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                 <Twitter className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -463,7 +463,7 @@ const FeedbackPage = () => {
           <div className="space-y-4">
             <div className="bg-amber-50 p-5 rounded-xl border-2 border-gray-900">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-black text-gray-900 mb-1">
                     How quickly will you respond?
@@ -478,7 +478,7 @@ const FeedbackPage = () => {
 
             <div className="bg-blue-50 p-5 rounded-xl border-2 border-gray-900">
               <div className="flex items-start gap-3">
-                <Zap className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <Zap className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-black text-gray-900 mb-1">
                     Will my feature request be implemented?
@@ -494,7 +494,7 @@ const FeedbackPage = () => {
 
             <div className="bg-green-50 p-5 rounded-xl border-2 border-gray-900">
               <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-black text-gray-900 mb-1">
                     Can I track my submission?

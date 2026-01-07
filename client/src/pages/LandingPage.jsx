@@ -90,7 +90,7 @@ const LandingPage = () => {
       </section>
 
       {/* Problem Section */}
-      <section className="bg-gradient-to-br from-amber-900 to-amber-800 py-24 px-6 sm:px-8 md:px-12 lg:px-16">
+      <section className="bg-linear-to-br from-amber-900 to-amber-800 py-24 px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-amber-50 mb-8">
             97% of people don't know
@@ -154,7 +154,7 @@ const LandingPage = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
             <div className="space-y-12">
               <div className="flex gap-6">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="w-12 h-12 bg-amber-400 rounded-lg flex items-center justify-center text-2xl">
                     ✍️
                   </div>
@@ -172,7 +172,7 @@ const LandingPage = () => {
               </div>
 
               <div className="flex gap-6">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="w-12 h-12 bg-amber-400 rounded-lg flex items-center justify-center text-2xl">
                     🔗
                   </div>
@@ -190,7 +190,7 @@ const LandingPage = () => {
               </div>
 
               <div className="flex gap-6">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="w-12 h-12 bg-amber-400 rounded-lg flex items-center justify-center text-2xl">
                     🤑
                   </div>
@@ -209,7 +209,7 @@ const LandingPage = () => {
             </div>
 
             <div className="flex justify-center">
-              <div className="w-full max-w-md aspect-[4/5] bg-gradient-to-br from-amber-200 to-amber-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
+              <div className="w-full max-w-md aspect-[4/5] bg-linear-to-br from-amber-200 to-amber-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
                 <div className="bg-white rounded-2xl p-6 w-full shadow-lg">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 bg-amber-400 rounded-full"></div>
@@ -219,7 +219,7 @@ const LandingPage = () => {
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <div className="h-32 bg-gradient-to-r from-amber-400 to-orange-400 rounded-xl"></div>
+                    <div className="h-32 bg-linear-to-r from-amber-400 to-orange-400 rounded-xl"></div>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="h-20 bg-gray-100 rounded-lg"></div>
                       <div className="h-20 bg-gray-100 rounded-lg"></div>
@@ -248,7 +248,7 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-amber-50 p-8 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-3xl">
+                <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-3xl">
                   💪
                 </div>
                 <div>
@@ -266,7 +266,7 @@ const LandingPage = () => {
 
             <div className="bg-amber-50 p-8 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-3xl">
+                <div className="w-16 h-16 bg-linear-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-3xl">
                   📊
                 </div>
                 <div>
@@ -284,7 +284,7 @@ const LandingPage = () => {
 
             <div className="bg-amber-50 p-8 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-3xl">
+                <div className="w-16 h-16 bg-linear-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-3xl">
                   🎯
                 </div>
                 <div>
@@ -411,7 +411,7 @@ const LandingPage = () => {
             </p>
             <ul className="space-y-4 inline-block lg:block">
               <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
+                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <span className="text-lg text-gray-700">
@@ -419,7 +419,7 @@ const LandingPage = () => {
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
+                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <span className="text-lg text-gray-700">
@@ -427,7 +427,7 @@ const LandingPage = () => {
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
+                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <span className="text-lg text-gray-700">
@@ -435,7 +435,7 @@ const LandingPage = () => {
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
+                <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
                   <Check className="w-4 h-4 text-white" />
                 </div>
                 <span className="text-lg text-gray-700">
@@ -445,7 +445,7 @@ const LandingPage = () => {
             </ul>
           </div>
           <div className="lg:w-1/2 flex justify-center">
-            <div className="w-full max-w-md aspect-video bg-gradient-to-br from-amber-200 via-amber-300 to-orange-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
+            <div className="w-full max-w-md aspect-video bg-linear-to-br from-amber-200 via-amber-300 to-orange-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
               <div className="text-center">
                 <div className="text-6xl mb-4">📊</div>
                 <p className="text-gray-900 text-xl font-bold">
@@ -500,7 +500,7 @@ const LandingPage = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 py-24 px-6 sm:px-8 md:px-12 lg:px-16 text-center border-t-4 border-gray-900">
+      <section className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 py-24 px-6 sm:px-8 md:px-12 lg:px-16 text-center border-t-4 border-gray-900">
         <div className="container mx-auto">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
             Ready to Reclaim Your Focus?

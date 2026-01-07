@@ -21,6 +21,8 @@ import {
   AlertCircle,
   CheckCircle,
   PieChart as PieChartIcon,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import {
   PieChart,
@@ -45,10 +47,17 @@ const ExtensionDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [insights, setInsights] = useState(null);
   const [loadingInsights, setLoadingInsights] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     fetchExtensionData();
   }, []);
+
+  // Reset to page 1 when date changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedDate]);
 
   const fetchExtensionData = async () => {
     try {
@@ -92,6 +101,23 @@ const ExtensionDashboard = () => {
                     "reddit.com": 600000,
                     "docs.google.com": 1200000,
                     "linkedin.com": 450000,
+                    "medium.com": 380000,
+                    "dev.to": 320000,
+                    "facebook.com": 280000,
+                    "instagram.com": 250000,
+                    "tiktok.com": 220000,
+                    "netflix.com": 200000,
+                    "twitch.tv": 180000,
+                    "coursera.org": 160000,
+                    "udemy.com": 140000,
+                    "khanacademy.org": 120000,
+                    "amazon.com": 100000,
+                    "gmail.com": 90000,
+                    "slack.com": 80000,
+                    "notion.so": 70000,
+                    "figma.com": 60000,
+                    "vercel.com": 50000,
+                    "netlify.com": 40000,
                   },
                 },
               });
@@ -150,6 +176,11 @@ const ExtensionDashboard = () => {
         "linkedin.com",
         "medium.com",
         "dev.to",
+        "slack.com",
+        "notion.so",
+        "figma.com",
+        "vercel.com",
+        "netlify.com",
       ],
       learning: ["chatgpt.com", "coursera.org", "udemy.com", "khanacademy.org"],
       social: ["twitter.com", "facebook.com", "instagram.com", "tiktok.com"],
@@ -198,13 +229,28 @@ const ExtensionDashboard = () => {
   const selectedDateData = selectedDate
     ? extensionData[selectedDate] || {}
     : {};
-  const sortedDomains = Object.entries(selectedDateData)
+  
+  // Get all sorted domains (not just top 10)
+  const allSortedDomains = Object.entries(selectedDateData)
     .filter(
       ([domain]) =>
         domain && domain !== "null" && domain !== "newtab" && domain !== ""
     )
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 10);
+    .sort(([, a], [, b]) => b - a);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(allSortedDomains.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedDomains = allSortedDomains.slice(startIndex, endIndex);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      // Scroll to top of websites section
+      document.getElementById('top-websites-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const totalTime = Object.values(selectedDateData).reduce(
     (sum, time) => sum + time,
@@ -295,7 +341,7 @@ const ExtensionDashboard = () => {
       }
 
       const response = await fetch(
-        `${VITE_API_URL}/api/insights/generate`,
+        `http://localhost:3001/api/insights/generate`,
         {
           method: "POST",
           headers: {
@@ -328,7 +374,7 @@ const ExtensionDashboard = () => {
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `mora-data-\${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `mora-data-${new Date().toISOString().split('T')[0]}.json`;
     link.click();
   };
 
@@ -350,14 +396,14 @@ const ExtensionDashboard = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
+              <div className="w-12 h-12 bg-linear-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
                 <BarChart3 className="w-6 h-6 text-gray-900" />
               </div>
               <h1 className="text-4xl font-black text-gray-900">
                 Extension Dashboard
               </h1>
             </div>
-            <p className="text-lg text-gray-600 font-medium ml-15">
+            <p className="text-lg text-gray-600 font-medium">
               Track and analyze your browsing patterns
             </p>
           </div>
@@ -432,7 +478,7 @@ const ExtensionDashboard = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="bg-white p-6 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-all group">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                     <Clock className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
@@ -449,7 +495,7 @@ const ExtensionDashboard = () => {
 
               <div className="bg-white p-6 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-all group">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-linear-to-br from-green-400 to-green-600 flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-xs font-bold text-green-600 bg-green-100 px-3 py-1 rounded-full">
@@ -466,7 +512,7 @@ const ExtensionDashboard = () => {
 
               <div className="bg-white p-6 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-all group">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-linear-to-br from-red-400 to-red-600 flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                     <AlertCircle className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-xs font-bold text-red-600 bg-red-100 px-3 py-1 rounded-full">
@@ -481,7 +527,7 @@ const ExtensionDashboard = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-amber-400 to-orange-400 p-6 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-all group">
+              <div className="bg-linear-to-br from-amber-400 to-orange-400 p-6 rounded-2xl border-2 border-gray-900 shadow-lg hover:shadow-xl transition-all group">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                     <Globe className="w-6 h-6 text-gray-900" />
@@ -500,11 +546,11 @@ const ExtensionDashboard = () => {
             </div>
 
             {/* Productivity Score Card */}
-            <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-amber-50 rounded-2xl p-8 border-2 border-gray-900 shadow-lg">
+            <div className="bg-linear-to-br from-purple-50 via-blue-50 to-amber-50 rounded-2xl p-8 border-2 border-gray-900 shadow-lg">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-400 rounded-xl flex items-center justify-center border-2 border-gray-900">
+                    <div className="w-12 h-12 bg-linear-to-br from-purple-400 to-blue-400 rounded-xl flex items-center justify-center border-2 border-gray-900">
                       <Target className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -541,7 +587,7 @@ const ExtensionDashboard = () => {
                   </div>
                   <div className="mt-4 w-full h-4 rounded-full bg-white border-2 border-gray-900 overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-green-400 via-amber-400 to-red-400 transition-all duration-500"
+                      className="h-full bg-linear-to-r from-green-400 via-amber-400 to-red-400 transition-all duration-500"
                       style={{ width: `${productivityScore}%` }}
                     ></div>
                   </div>
@@ -571,7 +617,7 @@ const ExtensionDashboard = () => {
             {insights && (
               <div className="bg-white rounded-2xl p-8 border-2 border-gray-900 shadow-lg animate-fadeIn">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-400 rounded-xl flex items-center justify-center border-2 border-gray-900">
+                  <div className="w-12 h-12 bg-linear-to-br from-purple-400 to-pink-400 rounded-xl flex items-center justify-center border-2 border-gray-900">
                     <Sparkles className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -583,7 +629,7 @@ const ExtensionDashboard = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6 border-2 border-gray-200">
+                <div className="bg-linear-to-br from-purple-50 to-blue-50 rounded-xl p-6 border-2 border-gray-200">
                   <div className="prose max-w-none">
                     <div className="whitespace-pre-wrap text-gray-800 leading-relaxed font-medium">
                       {insights.insights}
@@ -674,7 +720,7 @@ const ExtensionDashboard = () => {
                           >
                             <div className="flex items-center gap-2 mb-1">
                               <div
-                                className={`w-3 h-3 rounded-full bg-gradient-to-br ${colors.bg} border-2 border-gray-900`}
+                                className={`w-3 h-3 rounded-full bg-linear-to-br ${colors.bg} border-2 border-gray-900`}
                               ></div>
                               <span className="text-sm font-bold text-gray-900">
                                 {cat.name}
@@ -765,24 +811,29 @@ const ExtensionDashboard = () => {
               </div>
             </div>
 
-            {/* Top Websites */}
-            <div className="bg-white rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+            {/* Top Websites with Pagination */}
+            <div id="top-websites-section" className="bg-white rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
                     <Globe className="w-5 h-5 text-gray-900" />
                   </div>
-                  <h3 className="text-xl font-black text-gray-900">
-                    Top 10 Websites
-                  </h3>
+                  <div>
+                    <h3 className="text-xl font-black text-gray-900">
+                      All Websites
+                    </h3>
+                    <p className="text-xs font-semibold text-gray-600">
+                      {allSortedDomains.length} total sites • Page {currentPage} of {totalPages}
+                    </p>
+                  </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm font-semibold text-gray-600">
                   <Eye className="w-4 h-4" />
-                  <span>Ranked by time spent</span>
+                  <span>Ranked by time</span>
                 </div>
               </div>
 
-              {sortedDomains.length === 0 ? (
+              {paginatedDomains.length === 0 ? (
                 <div className="text-center py-12">
                   <Globe className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <p className="text-gray-500 font-semibold">
@@ -790,70 +841,146 @@ const ExtensionDashboard = () => {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  {sortedDomains.map(([domain, time], index) => {
-                    const percentage = (time / totalTime) * 100;
-                    const category = categorizeWebsite(domain);
-                    const colors = getCategoryColor(category);
+                <>
+                  <div className="space-y-4 mb-6">
+                    {paginatedDomains.map(([domain, time], index) => {
+                      const percentage = (time / totalTime) * 100;
+                      const category = categorizeWebsite(domain);
+                      const colors = getCategoryColor(category);
+                      const globalIndex = startIndex + index;
 
-                    return (
-                      <div
-                        key={domain}
-                        className="group hover:bg-amber-50 p-4 rounded-xl transition-all border-2 border-transparent hover:border-gray-900"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-lg font-black text-gray-900 border-2 border-gray-900 shadow-md group-hover:scale-110 transition-transform">
-                            {index + 1}
-                          </div>
+                      return (
+                        <div
+                          key={domain}
+                          className="group hover:bg-amber-50 p-4 rounded-xl transition-all border-2 border-transparent hover:border-gray-900"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="shrink-0 w-10 h-10 bg-linear-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-lg font-black text-gray-900 border-2 border-gray-900 shadow-md group-hover:scale-110 transition-transform">
+                              {globalIndex + 1}
+                            </div>
 
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-3">
-                                <span className="font-bold text-gray-900 truncate">
-                                  {domain}
-                                </span>
-                                <span
-                                  className={`text-xs font-bold px-2 py-1 rounded-full ${colors.light} ${colors.text}`}
-                                >
-                                  {category.toUpperCase()}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-3">
+                                  <span className="font-bold text-gray-900 truncate">
+                                    {domain}
+                                  </span>
+                                  <span
+                                    className={`text-xs font-bold px-2 py-1 rounded-full ${colors.light} ${colors.text}`}
+                                  >
+                                    {category.toUpperCase()}
+                                  </span>
+                                </div>
+                                <span className="text-sm font-bold text-gray-900 ml-4">
+                                  {formatTime(time)}
                                 </span>
                               </div>
-                              <span className="text-sm font-bold text-gray-900 ml-4">
-                                {formatTime(time)}
-                              </span>
-                            </div>
 
-                            <div className="relative w-full h-3 rounded-full bg-gray-200 border-2 border-gray-900 overflow-hidden">
-                              <div
-                                className={`h-full bg-gradient-to-r ${colors.bg} transition-all duration-500`}
-                                style={{ width: `${percentage}%` }}
-                              ></div>
-                            </div>
+                              <div className="relative w-full h-3 rounded-full bg-gray-200 border-2 border-gray-900 overflow-hidden">
+                                <div
+                                  className={`h-full bg-linear-to-r ${colors.bg} transition-all duration-500`}
+                                  style={{ width: `${percentage}%` }}
+                                ></div>
+                              </div>
 
-                            <div className="flex items-center justify-between mt-2">
-                              <span className="text-xs font-semibold text-gray-600">
-                                {percentage.toFixed(1)}% of total time
-                              </span>
-                              {index === 0 && (
-                                <div className="flex items-center gap-1 text-xs font-bold text-amber-600">
-                                  <Award className="w-3 h-3" />
-                                  <span>Most Visited</span>
-                                </div>
-                              )}
+                              <div className="flex items-center justify-between mt-2">
+                                <span className="text-xs font-semibold text-gray-600">
+                                  {percentage.toFixed(1)}% of total time
+                                </span>
+                                {globalIndex === 0 && (
+                                  <div className="flex items-center gap-1 text-xs font-bold text-amber-600">
+                                    <Award className="w-3 h-3" />
+                                    <span>Most Visited</span>
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-between pt-6 border-t-2 border-amber-100">
+                      <div className="text-sm font-semibold text-gray-600">
+                        Showing {startIndex + 1}-{Math.min(endIndex, allSortedDomains.length)} of {allSortedDomains.length} websites
                       </div>
-                    );
-                  })}
-                </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handlePageChange(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className={`px-4 py-2 rounded-lg font-bold border-2 border-gray-900 transition-all flex items-center gap-2 ${
+                            currentPage === 1
+                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                              : 'bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg'
+                          }`}
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                          Previous
+                        </button>
+
+                        <div className="flex items-center gap-1">
+                          {[...Array(totalPages)].map((_, idx) => {
+                            const pageNum = idx + 1;
+                            // Show first page, last page, current page, and pages around current
+                            if (
+                              pageNum === 1 ||
+                              pageNum === totalPages ||
+                              (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                            ) {
+                              return (
+                                <button
+                                  key={pageNum}
+                                  onClick={() => handlePageChange(pageNum)}
+                                  className={`w-10 h-10 rounded-lg font-bold border-2 border-gray-900 transition-all ${
+                                    currentPage === pageNum
+                                      ? 'bg-linear-to-br from-amber-400 to-orange-400 text-gray-900 shadow-lg'
+                                      : 'bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg'
+                                  }`}
+                                >
+                                  {pageNum}
+                                </button>
+                              );
+                            } else if (
+                              pageNum === currentPage - 2 ||
+                              pageNum === currentPage + 2
+                            ) {
+                              return (
+                                <span key={pageNum} className="px-2 font-bold text-gray-400">
+                                  ...
+                                </span>
+                              );
+                            }
+                            return null;
+                          })}
+                        </div>
+
+                        <button
+                          onClick={() => handlePageChange(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                          className={`px-4 py-2 rounded-lg font-bold border-2 border-gray-900 transition-all flex items-center gap-2 ${
+                            currentPage === totalPages
+                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                              : 'bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg'
+                          }`}
+                        >
+                          Next
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Most Productive Day */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+              <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-green-400 rounded-lg flex items-center justify-center border-2 border-gray-900">
                     <TrendingUp className="w-5 h-5 text-gray-900" />
@@ -877,7 +1004,7 @@ const ExtensionDashboard = () => {
               </div>
 
               {/* Average Daily Time */}
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+              <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-gray-900">
                     <Clock className="w-5 h-5 text-gray-900" />
@@ -902,7 +1029,7 @@ const ExtensionDashboard = () => {
               </div>
 
               {/* Total Sites Tracked */}
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+              <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-purple-400 rounded-lg flex items-center justify-center border-2 border-gray-900">
                     <Globe className="w-5 h-5 text-gray-900" />
@@ -923,7 +1050,7 @@ const ExtensionDashboard = () => {
             </div>
 
             {/* Productivity Tips */}
-            <div className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-8 border-2 border-gray-900 shadow-xl">
+            <div className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-8 border-2 border-gray-900 shadow-xl">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
                   <Zap className="w-6 h-6 text-gray-900" />
@@ -941,7 +1068,7 @@ const ExtensionDashboard = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white/90 backdrop-blur-sm p-5 rounded-xl border-2 border-gray-900 shadow-md">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-green-400 rounded-lg flex items-center justify-center border-2 border-gray-900 flex-shrink-0">
+                    <div className="w-8 h-8 bg-green-400 rounded-lg flex items-center justify-center border-2 border-gray-900 shrink-0">
                       <CheckCircle className="w-5 h-5 text-gray-900" />
                     </div>
                     <div>
@@ -958,7 +1085,7 @@ const ExtensionDashboard = () => {
 
                 <div className="bg-white/90 backdrop-blur-sm p-5 rounded-xl border-2 border-gray-900 shadow-md">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-gray-900 flex-shrink-0">
+                    <div className="w-8 h-8 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-gray-900 shrink-0">
                       <Brain className="w-5 h-5 text-gray-900" />
                     </div>
                     <div>
@@ -975,7 +1102,7 @@ const ExtensionDashboard = () => {
 
                 <div className="bg-white/90 backdrop-blur-sm p-5 rounded-xl border-2 border-gray-900 shadow-md">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center border-2 border-gray-900 flex-shrink-0">
+                    <div className="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center border-2 border-gray-900 shrink-0">
                       <Target className="w-5 h-5 text-gray-900" />
                     </div>
                     <div>
@@ -992,7 +1119,7 @@ const ExtensionDashboard = () => {
 
                 <div className="bg-white/90 backdrop-blur-sm p-5 rounded-xl border-2 border-gray-900 shadow-md">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-purple-400 rounded-lg flex items-center justify-center border-2 border-gray-900 flex-shrink-0">
+                    <div className="w-8 h-8 bg-purple-400 rounded-lg flex items-center justify-center border-2 border-gray-900 shrink-0">
                       <Activity className="w-5 h-5 text-gray-900" />
                     </div>
                     <div>
@@ -1016,3 +1143,6 @@ const ExtensionDashboard = () => {
 };
 
 export default ExtensionDashboard;
+
+
+

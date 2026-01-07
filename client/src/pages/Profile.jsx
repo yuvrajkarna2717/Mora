@@ -94,7 +94,7 @@ const Profile = () => {
               className="bg-white rounded-xl p-4 border-2 border-gray-900 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div
-                className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 border-2 border-gray-900`}
+                className={`w-10 h-10 rounded-lg bg-linear-to-br ${stat.color} flex items-center justify-center mb-3 border-2 border-gray-900`}
               >
                 <stat.icon className="w-5 h-5 text-white" />
               </div>
@@ -112,7 +112,7 @@ const Profile = () => {
         <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pb-6 border-b-2 border-amber-100">
             <div className="flex items-center gap-4">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center text-white text-3xl font-black border-2 border-gray-900 shadow-lg">
+              <div className="w-20 h-20 rounded-full bg-linear-to-br from-amber-400 to-orange-400 flex items-center justify-center text-white text-3xl font-black border-2 border-gray-900 shadow-lg">
                 {formData.name.charAt(0)}
               </div>
               <div>

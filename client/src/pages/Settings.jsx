@@ -50,7 +50,7 @@ const Settings = () => {
     <button
       onClick={onChange}
       className={`relative w-14 h-7 rounded-full transition-all duration-300 border-2 border-gray-900 shadow-md \${
-        checked ? "bg-gradient-to-r from-amber-400 to-orange-400" : "bg-gray-300"
+        checked ? "bg-linear-to-r from-amber-400 to-orange-400" : "bg-gray-300"
       }`}
     >
       <span
@@ -67,7 +67,7 @@ const Settings = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
+            <div className="w-12 h-12 bg-linear-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
               <SettingsIcon className="w-6 h-6 text-gray-900" />
             </div>
             <h1 className="text-4xl sm:text-5xl font-black text-gray-900">
@@ -80,7 +80,7 @@ const Settings = () => {
         </div>
 
         {/* Account Info Card */}
-        <div className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-6 mb-6 border-2 border-gray-900 shadow-xl">
+        <div className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-6 mb-6 border-2 border-gray-900 shadow-xl">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl font-black border-2 border-gray-900 shadow-md">
               Y
@@ -304,7 +304,7 @@ const Settings = () => {
             </h3>
           </div>
 
-          <div className="p-5 rounded-xl flex items-center justify-between bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md">
+          <div className="p-5 rounded-xl flex items-center justify-between bg-linear-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md">
             <div className="flex items-center gap-4">
               <svg className="w-12 h-12" viewBox="0 0 24 24">
                 <path
@@ -362,7 +362,7 @@ const Settings = () => {
           </p>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <button className="p-5 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
+            <button className="p-5 rounded-xl bg-linear-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                   <Download className="w-5 h-5 text-white" />
@@ -379,7 +379,7 @@ const Settings = () => {
               </p>
             </button>
 
-            <button className="p-5 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
+            <button className="p-5 rounded-xl bg-linear-to-br from-purple-50 to-pink-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-purple-400 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                   <Database className="w-5 h-5 text-white" />
@@ -399,7 +399,7 @@ const Settings = () => {
         </div>
 
         {/* Danger Zone */}
-        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 sm:p-8 border-2 border-red-600 shadow-xl">
+        <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-2xl p-6 sm:p-8 border-2 border-red-600 shadow-xl">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center border-2 border-gray-900">
               <Trash2 className="w-5 h-5 text-white" />
@@ -409,7 +409,7 @@ const Settings = () => {
 
           <div className="bg-white rounded-xl p-5 border-2 border-red-600 mb-4">
             <div className="flex items-start gap-3 mb-4">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
               <div>
                 <p className="font-black text-gray-900 mb-2">
                   Delete Your Account
@@ -472,7 +472,7 @@ const Settings = () => {
         </div>
 
         {/* Save Changes Button */}
-        <div className="mt-8 bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl p-6 border-2 border-gray-900 shadow-xl text-center">
+        <div className="mt-8 bg-linear-to-r from-amber-400 to-orange-400 rounded-2xl p-6 border-2 border-gray-900 shadow-xl text-center">
           <button className="w-full sm:w-auto px-12 py-4 bg-gray-900 hover:bg-gray-800 text-amber-50 font-black text-lg rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-3 mx-auto">
             <CheckCircle className="w-6 h-6" />
             Save All Changes

@@ -30,7 +30,7 @@ const SignIn = () => {
 
   const handleGoogleSignIn = () => {
     const redirect = searchParams.get("redirect") || "/dashboard";
-    window.location.href = `${VITE_API_URL}/auth/google?redirect=${encodeURIComponent(
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google?redirect=${encodeURIComponent(
       redirect
     )}`;
   };
@@ -47,7 +47,7 @@ const SignIn = () => {
           {/* Welcome Card */}
           <div className="bg-white rounded-2xl p-8 sm:p-12 border-2 border-gray-900 shadow-xl mb-6">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-amber-400 to-orange-400 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
                 <span className="text-4xl">👋</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-3">
@@ -59,9 +59,9 @@ const SignIn = () => {
             </div>
 
             {/* User Info Card */}
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 mb-8 border-2 border-gray-900">
+            <div className="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-6 mb-8 border-2 border-gray-900">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-2xl border-2 border-gray-900 shadow-md">
+                <div className="w-16 h-16 bg-linear-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center text-white font-black text-2xl border-2 border-gray-900 shadow-md">
                   {user?.name?.charAt(0).toUpperCase() || "Y"}
                 </div>
                 <div>
@@ -89,7 +89,7 @@ const SignIn = () => {
             <div className="space-y-4">
               <button
                 onClick={() => navigate("/dashboard")}
-                className="group relative w-full flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 hover:scale-105"
+                className="group relative w-full flex items-center justify-center gap-3 py-4 px-6 bg-linear-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 hover:scale-105"
               >
                 <BarChart3 className="w-5 h-5" />
                 Go to Dashboard
@@ -132,7 +132,7 @@ const SignIn = () => {
         {/* Main Sign In Card */}
         <div className="bg-white rounded-2xl p-8 sm:p-12 border-2 border-gray-900 shadow-xl mb-6">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-amber-400 to-orange-400 rounded-full mb-6 border-2 border-gray-900 shadow-lg">
               <span className="text-4xl">📊</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-3">
@@ -146,7 +146,7 @@ const SignIn = () => {
 
           {/* Features Grid */}
           <div className="grid sm:grid-cols-3 gap-4 mb-8">
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl border-2 border-gray-900 text-center">
+            <div className="bg-linear-to-br from-green-50 to-emerald-50 p-4 rounded-xl border-2 border-gray-900 text-center">
               <div className="w-10 h-10 bg-green-400 rounded-lg flex items-center justify-center mx-auto mb-3 border-2 border-gray-900">
                 <CheckCircle className="w-5 h-5 text-gray-900" />
               </div>
@@ -156,7 +156,7 @@ const SignIn = () => {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-xl border-2 border-gray-900 text-center">
+            <div className="bg-linear-to-br from-blue-50 to-cyan-50 p-4 rounded-xl border-2 border-gray-900 text-center">
               <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center mx-auto mb-3 border-2 border-gray-900">
                 <Shield className="w-5 h-5 text-gray-900" />
               </div>
@@ -166,7 +166,7 @@ const SignIn = () => {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-xl border-2 border-gray-900 text-center">
+            <div className="bg-linear-to-br from-purple-50 to-pink-50 p-4 rounded-xl border-2 border-gray-900 text-center">
               <div className="w-10 h-10 bg-purple-400 rounded-lg flex items-center justify-center mx-auto mb-3 border-2 border-gray-900">
                 <Zap className="w-5 h-5 text-gray-900" />
               </div>
@@ -180,7 +180,7 @@ const SignIn = () => {
           {/* Google Sign In Button */}
           <button
             onClick={handleGoogleSignIn}
-            className="group relative w-full flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 hover:scale-105"
+            className="group relative w-full flex items-center justify-center gap-3 py-4 px-6 bg-linear-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-gray-900 rounded-xl font-black text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-900 hover:scale-105"
           >
             <svg className="w-6 h-6" viewBox="0 0 24 24">
               <path
@@ -223,31 +223,31 @@ const SignIn = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-6 border-2 border-gray-900 shadow-xl">
+        <div className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-6 border-2 border-gray-900 shadow-xl">
           <h3 className="text-xl font-black text-gray-900 mb-4 text-center">
             What you'll get with Mora
           </h3>
           <div className="space-y-3">
             <div className="flex items-center gap-3 bg-white/90 p-3 rounded-lg border-2 border-gray-900">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-sm font-bold text-gray-900">
                 Automatic browsing tracking & insights
               </span>
             </div>
             <div className="flex items-center gap-3 bg-white/90 p-3 rounded-lg border-2 border-gray-900">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-sm font-bold text-gray-900">
                 AI-powered productivity recommendations
               </span>
             </div>
             <div className="flex items-center gap-3 bg-white/90 p-3 rounded-lg border-2 border-gray-900">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-sm font-bold text-gray-900">
                 Beautiful analytics dashboard
               </span>
             </div>
             <div className="flex items-center gap-3 bg-white/90 p-3 rounded-lg border-2 border-gray-900">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-sm font-bold text-gray-900">
                 Export your data anytime
               </span>

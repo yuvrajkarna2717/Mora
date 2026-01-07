@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
+              <div className="w-10 h-10 bg-linear-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-lg">
                 <span className="text-2xl">📊</span>
               </div>
               <span className="text-2xl font-black text-gray-900">Mora</span>
@@ -22,7 +22,7 @@ const Footer = () => {
                 <Sparkles className="w-4 h-4 text-gray-900" />
               </div>
               <span className="text-sm font-bold text-gray-900">
-                Free Forever
+                Free 
               </span>
             </div>
             <p className="text-xs font-semibold text-gray-600">
@@ -158,7 +158,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className="bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-8 mb-12 border-2 border-gray-900 shadow-xl">
+        <div className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-8 mb-12 border-2 border-gray-900 shadow-xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-black text-gray-900 mb-2">
@@ -171,7 +171,7 @@ const Footer = () => {
             <div className="flex gap-3 w-full md:w-auto">
               <input
                 type="email"
-                placeholder="your@email.com"
+                placeholder="yuvrajkarna.code@gmail.com"
                 className="px-4 py-3 rounded-lg border-2 border-gray-900 focus:ring-4 focus:ring-white focus:ring-opacity-50 outline-none font-semibold text-gray-900 flex-1 md:w-64"
               />
               <button className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-amber-50 rounded-lg font-bold transition-all border-2 border-gray-900 shadow-lg hover:shadow-xl flex items-center gap-2">
@@ -191,7 +191,7 @@ const Footer = () => {
               <p className="text-gray-700 text-sm font-semibold">
                 by{" "}
                 <a
-                  href="https://github.com/yuvrajkarna"
+                  href="https://linkedin.com/in/yuvrajkarna"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-amber-600 hover:text-amber-700 font-bold underline decoration-2 decoration-amber-400"
@@ -204,7 +204,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <a
-                href="https://twitter.com/mora"
+                href="https://twitter.com/yuvrajkarna"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white hover:bg-gray-900 text-gray-900 hover:text-amber-50 rounded-lg border-2 border-gray-900 flex items-center justify-center transition-all shadow-md hover:shadow-lg group"
@@ -220,7 +220,7 @@ const Footer = () => {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com/company/mora"
+                href="https://linkedin.com/in/yuvrajkarna"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white hover:bg-gray-900 text-gray-900 hover:text-amber-50 rounded-lg border-2 border-gray-900 flex items-center justify-center transition-all shadow-md hover:shadow-lg group"
@@ -228,7 +228,7 @@ const Footer = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:hello@mora.app"
+                href="mailto:yuvrajkarna.code@gmail.com"
                 className="w-10 h-10 bg-white hover:bg-gray-900 text-gray-900 hover:text-amber-50 rounded-lg border-2 border-gray-900 flex items-center justify-center transition-all shadow-md hover:shadow-lg group"
               >
                 <Mail className="w-5 h-5" />
@@ -239,7 +239,7 @@ const Footer = () => {
           {/* Additional Info */}
           <div className="mt-6 pt-6 border-t-2 border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-gray-600">
-              <span>🌍 Made in Paris</span>
+              <span>🌍 Made on Earth 😂</span>
               <span>•</span>
               <span>🚀 Powered by AI</span>
               <span>•</span>
