@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Mail, Github, Twitter, Linkedin, Heart, Sparkles } from "lucide-react";
+import { Mail, Twitter, Linkedin, Heart, Sparkles } from "lucide-react";
 
 const Footer = () => {
+  const scrollToTop = () => window.scrollTo(0, 0);
   return (
     <footer className="bg-amber-50 py-16 px-6 sm:px-8 md:px-12 lg:px-16 border-t-2 border-gray-900">
       <div className="container mx-auto">
@@ -15,15 +16,13 @@ const Footer = () => {
               <span className="text-2xl font-black text-gray-900">Mora</span>
             </div>
             <p className="text-gray-700 leading-relaxed mb-4 font-medium">
-              Understand your browser behavior.
+              Transform your digital habits into productivity wins.
             </p>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center border-2 border-gray-900">
                 <Sparkles className="w-4 h-4 text-gray-900" />
               </div>
-              <span className="text-sm font-bold text-gray-900">
-                Free 
-              </span>
+              <span className="text-sm font-bold text-gray-900">Free</span>
             </div>
             <p className="text-xs font-semibold text-gray-600">
               Copyright © 2025 - All rights reserved
@@ -47,15 +46,16 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/features"
+                  to="/backup"
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
-                  Features
+                  Backup Data
                 </Link>
               </li>
               <li>
                 <Link
                   to="/pricing"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Pricing
@@ -82,6 +82,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/terms"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Terms of Service
@@ -90,6 +91,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/privacy-policy"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Privacy Policy
@@ -98,18 +100,20 @@ const Footer = () => {
               <li>
                 <Link
                   to="/cookies"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Cookie Policy
                 </Link>
               </li>
               <li>
-                <Link
+                {/* <Link
                   to="/gdpr"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   GDPR
-                </Link>
+                </Link> */}
               </li>
             </ul>
           </div>
@@ -124,6 +128,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/blog"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Blog
@@ -132,6 +137,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/docs"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Documentation
@@ -140,6 +146,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/support"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Support
@@ -148,6 +155,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/community"
+                  onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
                   Community
@@ -211,7 +219,7 @@ const Footer = () => {
               >
                 <Twitter className="w-5 h-5" />
               </a>
-           
+
               <a
                 href="https://linkedin.com/in/yuvrajkarna"
                 target="_blank"
