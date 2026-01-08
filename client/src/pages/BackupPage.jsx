@@ -585,7 +585,7 @@ const BackupPage = () => {
           <p className="text-sm text-gray-600 font-semibold mb-2">
             Need help with backups?{" "}
             <a
-              href="/support"
+              href="/feedback"
               className="text-amber-600 hover:text-amber-700 font-bold underline"
             >
               Contact Support

@@ -54,13 +54,13 @@ const LandingPage = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Link
               to="/signup"
-              className="inline-flex items-center justify-center px-8 py-4 bg-amber-400 hover:bg-amber-500 text-gray-900 rounded-xl text-lg font-bold transition-all duration-300 shadow-md hover:shadow-xl min-w-[240px]"
+              className="inline-flex items-center justify-center px-8 py-4 bg-amber-400 hover:bg-amber-500 text-gray-900 rounded-xl text-lg font-bold transition-all duration-300 shadow-md hover:shadow-xl min-w-60"
             >
               Get Mora →
             </Link>
             <Link
               to="/demo"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-900 text-gray-900 rounded-xl text-lg font-bold transition-all duration-300 hover:bg-gray-900 hover:text-amber-50 min-w-[240px]"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-900 text-gray-900 rounded-xl text-lg font-bold transition-all duration-300 hover:bg-gray-900 hover:text-amber-50 min-w-60"
             >
               See How It Works
             </Link>
@@ -69,21 +69,15 @@ const LandingPage = () => {
           <div className="flex items-center justify-center gap-6 flex-wrap">
             <div className="flex items-center gap-3">
               <Check className="w-5 h-5 text-green-600" />
-              <span className="text-gray-700 font-medium">
-                Pay once, use forever
-              </span>
+              <span className="text-gray-700 font-medium">Free</span>
             </div>
             <div className="flex items-center gap-3">
               <Check className="w-5 h-5 text-green-600" />
-              <span className="text-gray-700 font-medium">
-                1-minute no-code setup
-              </span>
+              <span className="text-gray-700 font-medium">1-minute setup</span>
             </div>
             <div className="flex items-center gap-3">
               <Check className="w-5 h-5 text-green-600" />
-              <span className="text-gray-700 font-medium">
-                Privacy-first tracking
-              </span>
+              <span className="text-gray-700 font-medium">Privacy-first</span>
             </div>
           </div>
         </div>
@@ -209,7 +203,7 @@ const LandingPage = () => {
             </div>
 
             <div className="flex justify-center">
-              <div className="w-full max-w-md aspect-[4/5] bg-linear-to-br from-amber-200 to-amber-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
+              <div className="w-full max-w-md aspect-4/5 bg-linear-to-br from-amber-200 to-amber-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
                 <div className="bg-white rounded-2xl p-6 w-full shadow-lg">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 bg-amber-400 rounded-full"></div>

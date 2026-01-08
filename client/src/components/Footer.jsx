@@ -145,11 +145,11 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/support"
+                  to="/feedback"
                   onClick={scrollToTop}
                   className="text-gray-700 hover:text-gray-900 font-semibold transition-colors hover:translate-x-1 inline-block"
                 >
-                  Support
+                  Feedback
                 </Link>
               </li>
               <li>

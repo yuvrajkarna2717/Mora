@@ -19,7 +19,7 @@ const NotFound = () => {
             Back to Dashboard
           </Link>
           <Link
-            to="/support"
+            to="/feedback"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all"
           >
             <HeadphonesIcon className="w-5 h-5" />
