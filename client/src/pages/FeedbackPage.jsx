@@ -95,25 +95,52 @@ const FeedbackPage = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/feedback/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            feedbackType: feedbackType,
+            title: formData.title,
+            description: formData.description,
+            priority: formData.priority,
+            category: formData.category,
+          }),
+        }
+      );
 
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-        setFormData({
-          name: "",
-          email: "",
-          title: "",
-          description: "",
-          priority: "medium",
-          category: "",
-        });
-        setAttachments([]);
-      }, 3000);
-    }, 1500);
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({
+            name: "",
+            email: "",
+            title: "",
+            description: "",
+            priority: "medium",
+            category: "",
+          });
+          setAttachments([]);
+        }, 3000);
+      } else {
+        alert(data.message || "Failed to submit feedback");
+      }
+    } catch (error) {
+      console.error("Feedback submission error:", error);
+      alert("Failed to submit feedback. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const selectedType = feedbackTypes.find((type) => type.id === feedbackType);
@@ -127,7 +154,7 @@ const FeedbackPage = () => {
               <CheckCircle className="w-10 h-10 text-white" />
             </div>
             <h2 className="text-4xl font-black text-gray-900 mb-4">
-              Thank You, Yuvraj! 🎉
+              Thank You! 🎉
             </h2>
             <p className="text-lg text-gray-600 font-semibold mb-6">
               Your{" "}
@@ -143,8 +170,8 @@ const FeedbackPage = () => {
                 What happens next?
               </p>
               <p className="text-sm text-gray-700 leading-relaxed">
-                Our team in Paris 🇫🇷 will review your submission within 24-48
-                hours. We'll send you an email at{" "}
+                Our team will review your submission within 24-48 hours. We'll
+                send you an email at{" "}
                 <span className="font-bold text-amber-600">
                   {formData.email}
                 </span>{" "}
@@ -401,7 +428,7 @@ const FeedbackPage = () => {
 
           <div className="grid md:grid-cols-2 gap-4">
             <a
-              href="mailto:feedback@mora.app"
+              href="mailto:yuvrajkarna.code@gmail.com"
               className="flex items-center justify-center gap-3 bg-white hover:bg-amber-50 p-5 rounded-xl border-2 border-gray-900 shadow-md hover:shadow-lg transition-all group"
             >
               <div className="w-10 h-10 bg-linear-to-br from-red-400 to-pink-500 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
@@ -416,7 +443,7 @@ const FeedbackPage = () => {
             </a>
 
             <a
-              href="https://twitter.com/mora"
+              href="https://twitter.com/yuvrajkarna"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 bg-white hover:bg-amber-50 p-5 rounded-xl border-2 border-gray-900 shadow-md hover:shadow-lg transition-all group"

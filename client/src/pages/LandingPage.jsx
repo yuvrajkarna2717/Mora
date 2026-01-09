@@ -203,20 +203,76 @@ const LandingPage = () => {
             </div>
 
             <div className="flex justify-center">
-              <div className="w-full max-w-md aspect-4/5 bg-linear-to-br from-amber-200 to-amber-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
-                <div className="bg-white rounded-2xl p-6 w-full shadow-lg">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-amber-400 rounded-full"></div>
-                    <div className="flex-1">
-                      <div className="h-3 bg-gray-200 rounded mb-2 w-3/4"></div>
-                      <div className="h-2 bg-gray-100 rounded w-1/2"></div>
+              <div className="w-full max-w-md aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+                {/* Mock Mobile App UI */}
+                <div className="w-full h-full bg-white rounded-2xl border-2 border-gray-300 p-4 flex flex-col">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-amber-400 rounded-lg flex items-center justify-center">
+                        <span className="text-sm">📊</span>
+                      </div>
+                      <span className="font-bold text-sm text-gray-900">Mora</span>
+                    </div>
+                    <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                      <span className="text-xs">👤</span>
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <div className="h-32 bg-linear-to-r from-amber-400 to-orange-400 rounded-xl"></div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="h-20 bg-gray-100 rounded-lg"></div>
-                      <div className="h-20 bg-gray-100 rounded-lg"></div>
+                  {/* Main Chart */}
+                  <div className="h-32 bg-gradient-to-r from-amber-400 to-orange-400 rounded-xl mb-4 flex flex-col items-center justify-center relative">
+                    <div className="absolute top-2 left-2 text-white text-xs font-bold">Weekly Overview</div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-white font-bold text-lg">28.5h</span>
+                      <span className="text-amber-100 text-xs">this week</span>
+                    </div>
+                    <div className="flex gap-1 mt-2">
+                      <div className="w-2 h-8 bg-white/30 rounded"></div>
+                      <div className="w-2 h-6 bg-white/50 rounded"></div>
+                      <div className="w-2 h-10 bg-white/70 rounded"></div>
+                      <div className="w-2 h-4 bg-white/40 rounded"></div>
+                      <div className="w-2 h-8 bg-white/60 rounded"></div>
+                      <div className="w-2 h-12 bg-white rounded"></div>
+                      <div className="w-2 h-7 bg-white/80 rounded"></div>
+                    </div>
+                  </div>
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="h-20 bg-amber-50 rounded-lg flex flex-col items-center justify-center border border-amber-200">
+                      <span className="text-xs text-gray-600">Today</span>
+                      <span className="font-bold text-lg text-amber-600">4.2h</span>
+                      <span className="text-xs text-green-600">↓ 12% vs yesterday</span>
+                    </div>
+                    <div className="h-20 bg-blue-50 rounded-lg flex flex-col items-center justify-center border border-blue-200">
+                      <span className="text-xs text-gray-600">Focus Score</span>
+                      <span className="font-bold text-lg text-blue-600">85%</span>
+                      <span className="text-xs text-green-600">↑ 5% improvement</span>
+                    </div>
+                  </div>
+                  {/* Website List */}
+                  <div className="flex-1 bg-gray-50 rounded-lg p-2">
+                    <div className="text-xs text-gray-600 mb-2">Top Sites Today</div>
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                          YouTube
+                        </span>
+                        <span className="text-gray-600">1.2h</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                          GitHub
+                        </span>
+                        <span className="text-gray-600">0.8h</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                          Docs
+                        </span>
+                        <span className="text-gray-600">0.6h</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -439,15 +495,55 @@ const LandingPage = () => {
             </ul>
           </div>
           <div className="lg:w-1/2 flex justify-center">
-            <div className="w-full max-w-md aspect-video bg-linear-to-br from-amber-200 via-amber-300 to-orange-300 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-8">
-              <div className="text-center">
-                <div className="text-6xl mb-4">📊</div>
-                <p className="text-gray-900 text-xl font-bold">
-                  Product Screenshot
-                </p>
-                <p className="text-gray-700 text-sm mt-2">
-                  Dashboard & Analytics View
-                </p>
+            <div className="w-full max-w-md aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl shadow-2xl border-4 border-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+              {/* Mock Dashboard UI */}
+              <div className="w-full h-full bg-white rounded-2xl border-2 border-gray-300 p-3 flex flex-col">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 bg-amber-400 rounded-lg flex items-center justify-center">
+                      <span className="text-xs">📊</span>
+                    </div>
+                    <span className="font-bold text-xs text-gray-900">Mora Dashboard</span>
+                  </div>
+                  <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
+                    <span className="text-xs">👤</span>
+                  </div>
+                </div>
+                {/* Stats Cards */}
+                <div className="grid grid-cols-3 gap-1 mb-3">
+                  <div className="bg-amber-50 p-2 rounded-lg border border-amber-200">
+                    <div className="text-xs text-gray-600">Today</div>
+                    <div className="font-bold text-sm text-gray-900">4.2h</div>
+                    <div className="text-xs text-green-600">↓ 12%</div>
+                  </div>
+                  <div className="bg-blue-50 p-2 rounded-lg border border-blue-200">
+                    <div className="text-xs text-gray-600">Focus</div>
+                    <div className="font-bold text-sm text-gray-900">85%</div>
+                    <div className="text-xs text-green-600">↑ 5%</div>
+                  </div>
+                  <div className="bg-purple-50 p-2 rounded-lg border border-purple-200">
+                    <div className="text-xs text-gray-600">Sites</div>
+                    <div className="font-bold text-sm text-gray-900">12</div>
+                    <div className="text-xs text-gray-500">visited</div>
+                  </div>
+                </div>
+                {/* Chart Area */}
+                <div className="flex-1 bg-gray-50 rounded-lg border border-gray-200 p-2">
+                  <div className="text-xs text-gray-600 mb-2">Weekly Productivity</div>
+                  <div className="flex items-end justify-between h-12 gap-1">
+                    <div className="w-3 h-6 bg-amber-300 rounded-t"></div>
+                    <div className="w-3 h-8 bg-amber-400 rounded-t"></div>
+                    <div className="w-3 h-4 bg-amber-200 rounded-t"></div>
+                    <div className="w-3 h-10 bg-amber-500 rounded-t"></div>
+                    <div className="w-3 h-7 bg-amber-400 rounded-t"></div>
+                    <div className="w-3 h-9 bg-amber-500 rounded-t"></div>
+                    <div className="w-3 h-5 bg-amber-300 rounded-t"></div>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -455,7 +551,7 @@ const LandingPage = () => {
       </section>
 
       {/* Social Proof Section */}
-      <section className="bg-amber-50 py-20 px-6 sm:px-8 md:px-12 lg:px-16 border-t-2 border-gray-900">
+      {/* <section className="bg-amber-50 py-20 px-6 sm:px-8 md:px-12 lg:px-16 border-t-2 border-gray-900">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-12">
             Join Thousands Taking Control of Their Digital Lives
@@ -491,7 +587,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Final CTA Section */}
       <section className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 py-24 px-6 sm:px-8 md:px-12 lg:px-16 text-center border-t-4 border-gray-900">

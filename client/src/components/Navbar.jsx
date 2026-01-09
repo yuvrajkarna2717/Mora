@@ -35,7 +35,7 @@ const Navbar = () => {
             <div className="w-10 h-10 bg-linear-to-br from-amber-400 to-orange-400 rounded-xl flex items-center justify-center border-2 border-gray-900 shadow-md group-hover:shadow-lg transition-all">
               <span className="text-xl">📊</span>
             </div>
-            <span className="text-2xl font-black">Mora</span>
+            <span className="text-2xl font-black">mora</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -85,6 +85,14 @@ const Navbar = () => {
 
           {/* Desktop Auth Section */}
           <div className="hidden md:flex items-center gap-4">
+            <a
+              href="https://chrome.google.com/webstore/detail/mora-extension/your-extension-id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-black text-base transition-all duration-300 border-2 border-gray-900 shadow-md hover:shadow-lg hover:scale-105 whitespace-nowrap"
+            >
+              Add to Chrome
+            </a>
             {isAuthenticated ? (
               <div className="relative">
                 <button
@@ -111,10 +119,10 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl border-2 border-gray-900 shadow-xl overflow-hidden animate-fadeIn">
                     <div className="bg-linear-to-br from-amber-400 to-orange-400 px-4 py-3 border-b-2 border-gray-900">
                       <p className="text-sm font-black text-gray-900">
-                        {user?.name || "Yuvraj Karna"}
+                        {user?.name}
                       </p>
                       <p className="text-xs font-semibold text-gray-800">
-                        {user?.email || "yuvraj@mora.app"}
+                        {user?.email}
                       </p>
                     </div>
                     <Link

@@ -1,60 +1,125 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useExportData } from "../hooks/useExportData";
 import {
-  Bell,
   Trash2,
   Link as LinkIcon,
   Settings as SettingsIcon,
-  Shield,
   Globe,
-  Moon,
-  Sun,
-  Zap,
+  // Shield,
+  // Bell,
+  // Moon,
+  // Sun,
+  // Zap,
+  // Eye,
+  // EyeOff,
+  // Mail,
   Download,
   Database,
   CheckCircle,
   AlertCircle,
-  Eye,
-  EyeOff,
-  Mail,
 } from "lucide-react";
 
 const Settings = () => {
-  const [notifications, setNotifications] = useState({
-    email: true,
-    push: false,
-    weekly: true,
-    dailyReminder: true,
-    insights: true,
-  });
+  const navigate = useNavigate();
+  const { exportData } = useExportData();
+  const { user } = useSelector((state) => state.auth);
+  // const [notifications, setNotifications] = useState({
+  //   email: true,
+  //   push: false,
+  //   weekly: true,
+  //   dailyReminder: true,
+  //   insights: true,
+  // });
 
   const [preferences, setPreferences] = useState({
-    darkMode: false,
     autoBackup: true,
-    anonymousData: false,
   });
+
+  useEffect(() => {
+    fetchAutoBackupPreference();
+  }, []);
+
+  const fetchAutoBackupPreference = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:3001/api/preferences/auto-backup",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setPreferences({ autoBackup: data.auto_backup });
+      }
+    } catch (error) {
+      console.error("Error fetching auto backup preference:", error);
+    }
+  };
+
+  const toggleAutoBackup = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:3001/api/preferences/toggle-auto-backup",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setPreferences({ autoBackup: data.auto_backup });
+      }
+    } catch (error) {
+      console.error("Error toggling auto backup:", error);
+    }
+  };
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     if (
       window.confirm(
         "Are you absolutely sure? This action cannot be undone. All your data will be permanently deleted."
       )
     ) {
-      // Delete account logic
-      console.log("Deleting account...");
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:3001/api/preferences/account", {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        
+        if (response.ok) {
+          localStorage.clear();
+          navigate("/");
+        } else {
+          console.error("Failed to delete account");
+        }
+      } catch (error) {
+        console.error("Error deleting account:", error);
+      }
     }
   };
 
   const ToggleSwitch = ({ checked, onChange }) => (
     <button
       onClick={onChange}
-      className={`relative w-14 h-7 rounded-full transition-all duration-300 border-2 border-gray-900 shadow-md \${
-        checked ? "bg-linear-to-r from-amber-400 to-orange-400" : "bg-gray-300"
+      className={`relative w-14 h-7 rounded-full transition-all duration-300 border-2 border-gray-900 shadow-md ${
+        checked ? "bg-gradient-to-r from-amber-400 to-orange-400" : "bg-gray-300"
       }`}
     >
       <span
-        className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 border-2 border-gray-900 shadow-sm \${
+        className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 border-2 border-gray-900 shadow-sm ${
           checked ? "translate-x-7" : "translate-x-0"
         }`}
       />
@@ -83,22 +148,19 @@ const Settings = () => {
         <div className="bg-linear-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl p-6 mb-6 border-2 border-gray-900 shadow-xl">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl font-black border-2 border-gray-900 shadow-md">
-              Y
+              {user?.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-xl font-black text-gray-900">Yuvraj Karna</p>
-              <p className="text-sm font-bold text-gray-800">
-                Engineering • Paris 🇫🇷
-              </p>
+              <p className="text-xl font-black text-gray-900">{user?.name}</p>
               <p className="text-xs font-semibold text-gray-700 mt-1">
-                yuvraj@mora.app
+                {user?.email}
               </p>
             </div>
           </div>
         </div>
 
         {/* Notifications Section */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
+        {/* <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-amber-100">
             <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
               <Bell className="w-5 h-5 text-gray-900" />
@@ -214,7 +276,7 @@ const Settings = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Preferences Section */}
         <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-gray-900 shadow-lg mb-6">
@@ -226,7 +288,7 @@ const Settings = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+            {/* <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Moon className="w-4 h-4 text-blue-600" />
@@ -245,7 +307,7 @@ const Settings = () => {
                   })
                 }
               />
-            </div>
+            </div> */}
 
             <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
               <div>
@@ -259,16 +321,11 @@ const Settings = () => {
               </div>
               <ToggleSwitch
                 checked={preferences.autoBackup}
-                onChange={() =>
-                  setPreferences({
-                    ...preferences,
-                    autoBackup: !preferences.autoBackup,
-                  })
-                }
+                onChange={toggleAutoBackup}
               />
             </div>
 
-            <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
+            {/* <div className="flex items-center justify-between p-4 bg-purple-50 rounded-xl border-2 border-gray-200 hover:border-gray-900 transition-all">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Shield className="w-4 h-4 text-purple-600" />
@@ -289,7 +346,7 @@ const Settings = () => {
                   })
                 }
               />
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -329,7 +386,7 @@ const Settings = () => {
                   Google Account
                 </p>
                 <p className="text-sm text-gray-600 font-semibold">
-                  yuvraj@mora.app
+                  {user?.email}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
                   <CheckCircle className="w-4 h-4 text-green-600" />
@@ -339,9 +396,6 @@ const Settings = () => {
                 </div>
               </div>
             </div>
-            <button className="px-5 py-2.5 rounded-lg font-bold bg-white hover:bg-red-50 text-red-600 border-2 border-red-600 transition-all shadow-md hover:shadow-lg">
-              Disconnect
-            </button>
           </div>
         </div>
 
@@ -362,7 +416,10 @@ const Settings = () => {
           </p>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <button className="p-5 rounded-xl bg-linear-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
+            <button
+              onClick={exportData}
+              className="p-5 rounded-xl bg-linear-to-br from-blue-50 to-cyan-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group"
+            >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                   <Download className="w-5 h-5 text-white" />
@@ -379,7 +436,10 @@ const Settings = () => {
               </p>
             </button>
 
-            <button className="p-5 rounded-xl bg-linear-to-br from-purple-50 to-pink-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="p-5 rounded-xl bg-linear-to-br from-purple-50 to-pink-50 border-2 border-gray-900 shadow-md hover:shadow-lg transition-all hover:scale-102 text-left group"
+            >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-purple-400 rounded-lg flex items-center justify-center border-2 border-gray-900 group-hover:scale-110 transition-transform">
                   <Database className="w-5 h-5 text-white" />
@@ -472,7 +532,7 @@ const Settings = () => {
         </div>
 
         {/* Save Changes Button */}
-        <div className="mt-8 bg-linear-to-r from-amber-400 to-orange-400 rounded-2xl p-6 border-2 border-gray-900 shadow-xl text-center">
+        {/* <div className="mt-8 bg-linear-to-r from-amber-400 to-orange-400 rounded-2xl p-6 border-2 border-gray-900 shadow-xl text-center">
           <button className="w-full sm:w-auto px-12 py-4 bg-gray-900 hover:bg-gray-800 text-amber-50 font-black text-lg rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-3 mx-auto">
             <CheckCircle className="w-6 h-6" />
             Save All Changes
@@ -480,17 +540,17 @@ const Settings = () => {
           <p className="text-sm font-semibold text-gray-800 mt-3">
             Your settings are automatically saved
           </p>
-        </div>
+        </div> */}
 
         {/* Footer Info */}
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-600 font-semibold">
             Need help? Contact us at{" "}
             <a
-              href="mailto:support@mora.app"
+              href="mailto:yuvrajkarna.code@gmail.com"
               className="text-amber-600 hover:text-amber-700 font-bold underline"
             >
-              support@mora.app
+              yuvrajkarna.code@gmail.com
             </a>
           </p>
           <p className="text-xs text-gray-500 font-medium mt-2">

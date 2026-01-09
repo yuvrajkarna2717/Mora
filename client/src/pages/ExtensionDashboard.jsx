@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useExtensionData } from "../hooks/useExtensionData";
+import { useExportData } from "../hooks/useExportData";
+import { useSelector } from "react-redux";
 import {
   Calendar,
   Clock,
@@ -41,117 +44,28 @@ import {
 } from "recharts";
 
 const ExtensionDashboard = () => {
-  const [extensionData, setExtensionData] = useState({});
+  const { extensionData, availableDates, loading, fetchExtensionData } =
+    useExtensionData();
+  const { user } = useSelector((state) => state.auth);
+  const { exportData } = useExportData(extensionData);
   const [selectedDate, setSelectedDate] = useState("");
-  const [availableDates, setAvailableDates] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [insights, setInsights] = useState(null);
   const [loadingInsights, setLoadingInsights] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   useEffect(() => {
-    fetchExtensionData();
+    fetchExtensionData().then((dates) => {
+      if (dates.length > 0) {
+        setSelectedDate(dates[0]);
+      }
+    });
   }, []);
 
   // Reset to page 1 when date changes
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedDate]);
-
-  const fetchExtensionData = async () => {
-    try {
-      console.log("Fetching extension data...");
-
-      const response = await new Promise((resolve) => {
-        let attempts = 0;
-        const maxAttempts = 3;
-
-        const handleMessage = (event) => {
-          if (event.data.type === "EXTENSION_DATA_RESPONSE") {
-            console.log("Received extension data:", event.data);
-            window.removeEventListener("message", handleMessage);
-            resolve(event.data);
-          }
-        };
-
-        const tryFetch = () => {
-          attempts++;
-          console.log(`Attempt ${attempts} to fetch extension data`);
-
-          window.addEventListener("message", handleMessage);
-          window.postMessage({ type: "GET_EXTENSION_DATA" }, "*");
-
-          setTimeout(() => {
-            window.removeEventListener("message", handleMessage);
-
-            if (attempts < maxAttempts) {
-              console.log(`Attempt ${attempts} failed, retrying...`);
-              setTimeout(tryFetch, 500);
-            } else {
-              console.log("All attempts failed, using sample data");
-              resolve({
-                data: {
-                  "Thu Dec 26 2025": {
-                    "github.com": 7200000,
-                    "stackoverflow.com": 3600000,
-                    "chatgpt.com": 2700000,
-                    "youtube.com": 1800000,
-                    "twitter.com": 900000,
-                    "reddit.com": 600000,
-                    "docs.google.com": 1200000,
-                    "linkedin.com": 450000,
-                    "medium.com": 380000,
-                    "dev.to": 320000,
-                    "facebook.com": 280000,
-                    "instagram.com": 250000,
-                    "tiktok.com": 220000,
-                    "netflix.com": 200000,
-                    "twitch.tv": 180000,
-                    "coursera.org": 160000,
-                    "udemy.com": 140000,
-                    "khanacademy.org": 120000,
-                    "amazon.com": 100000,
-                    "gmail.com": 90000,
-                    "slack.com": 80000,
-                    "notion.so": 70000,
-                    "figma.com": 60000,
-                    "vercel.com": 50000,
-                    "netlify.com": 40000,
-                  },
-                },
-              });
-            }
-          }, 1000);
-        };
-
-        tryFetch();
-      });
-
-      if (response.data && Object.keys(response.data).length > 0) {
-        console.log("Setting extension data:", response.data);
-        setExtensionData(response.data);
-        const dates = Object.keys(response.data).sort(
-          (a, b) => new Date(b) - new Date(a)
-        );
-        setAvailableDates(dates);
-        if (dates.length > 0) {
-          setSelectedDate(dates[0]);
-        }
-        console.log(
-          "Extension data loaded:",
-          Object.keys(response.data).length,
-          "dates"
-        );
-      } else {
-        console.log("No extension data received, keeping current state");
-      }
-    } catch (error) {
-      console.error("Failed to fetch extension data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const formatTime = (milliseconds) => {
     const seconds = Math.floor(milliseconds / 1000);
@@ -169,6 +83,7 @@ const ExtensionDashboard = () => {
 
   const categorizeWebsite = (domain) => {
     const categories = {
+      development: ["localhost", "127.0.0.1", "dev.local"],
       productive: [
         "github.com",
         "stackoverflow.com",
@@ -229,7 +144,7 @@ const ExtensionDashboard = () => {
   const selectedDateData = selectedDate
     ? extensionData[selectedDate] || {}
     : {};
-  
+
   // Get all sorted domains (not just top 10)
   const allSortedDomains = Object.entries(selectedDateData)
     .filter(
@@ -248,7 +163,9 @@ const ExtensionDashboard = () => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
       // Scroll to top of websites section
-      document.getElementById('top-websites-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document
+        .getElementById("top-websites-section")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -366,16 +283,6 @@ const ExtensionDashboard = () => {
     } finally {
       setLoadingInsights(false);
     }
-  };
-
-  const exportData = () => {
-    const dataStr = JSON.stringify(extensionData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `mora-data-${new Date().toISOString().split('T')[0]}.json`;
-    link.click();
   };
 
   if (loading) {
@@ -812,7 +719,10 @@ const ExtensionDashboard = () => {
             </div>
 
             {/* Top Websites with Pagination */}
-            <div id="top-websites-section" className="bg-white rounded-2xl p-6 border-2 border-gray-900 shadow-lg">
+            <div
+              id="top-websites-section"
+              className="bg-white rounded-2xl p-6 border-2 border-gray-900 shadow-lg"
+            >
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center border-2 border-gray-900">
@@ -823,7 +733,8 @@ const ExtensionDashboard = () => {
                       All Websites
                     </h3>
                     <p className="text-xs font-semibold text-gray-600">
-                      {allSortedDomains.length} total sites • Page {currentPage} of {totalPages}
+                      {allSortedDomains.length} total sites • Page {currentPage}{" "}
+                      of {totalPages}
                     </p>
                   </div>
                 </div>
@@ -905,17 +816,19 @@ const ExtensionDashboard = () => {
                   {totalPages > 1 && (
                     <div className="flex items-center justify-between pt-6 border-t-2 border-amber-100">
                       <div className="text-sm font-semibold text-gray-600">
-                        Showing {startIndex + 1}-{Math.min(endIndex, allSortedDomains.length)} of {allSortedDomains.length} websites
+                        Showing {startIndex + 1}-
+                        {Math.min(endIndex, allSortedDomains.length)} of{" "}
+                        {allSortedDomains.length} websites
                       </div>
-                      
+
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handlePageChange(currentPage - 1)}
                           disabled={currentPage === 1}
                           className={`px-4 py-2 rounded-lg font-bold border-2 border-gray-900 transition-all flex items-center gap-2 ${
                             currentPage === 1
-                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                              : 'bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg'
+                              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                              : "bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg"
                           }`}
                         >
                           <ChevronLeft className="w-4 h-4" />
@@ -929,7 +842,8 @@ const ExtensionDashboard = () => {
                             if (
                               pageNum === 1 ||
                               pageNum === totalPages ||
-                              (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                              (pageNum >= currentPage - 1 &&
+                                pageNum <= currentPage + 1)
                             ) {
                               return (
                                 <button
@@ -937,8 +851,8 @@ const ExtensionDashboard = () => {
                                   onClick={() => handlePageChange(pageNum)}
                                   className={`w-10 h-10 rounded-lg font-bold border-2 border-gray-900 transition-all ${
                                     currentPage === pageNum
-                                      ? 'bg-linear-to-br from-amber-400 to-orange-400 text-gray-900 shadow-lg'
-                                      : 'bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg'
+                                      ? "bg-linear-to-br from-amber-400 to-orange-400 text-gray-900 shadow-lg"
+                                      : "bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg"
                                   }`}
                                 >
                                   {pageNum}
@@ -949,7 +863,10 @@ const ExtensionDashboard = () => {
                               pageNum === currentPage + 2
                             ) {
                               return (
-                                <span key={pageNum} className="px-2 font-bold text-gray-400">
+                                <span
+                                  key={pageNum}
+                                  className="px-2 font-bold text-gray-400"
+                                >
                                   ...
                                 </span>
                               );
@@ -963,8 +880,8 @@ const ExtensionDashboard = () => {
                           disabled={currentPage === totalPages}
                           className={`px-4 py-2 rounded-lg font-bold border-2 border-gray-900 transition-all flex items-center gap-2 ${
                             currentPage === totalPages
-                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                              : 'bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg'
+                              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                              : "bg-white hover:bg-amber-50 text-gray-900 shadow-md hover:shadow-lg"
                           }`}
                         >
                           Next
@@ -1057,7 +974,7 @@ const ExtensionDashboard = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-black text-gray-900">
-                    Quick Tips for Yuvraj
+                    Quick Tips for {user?.name}
                   </h3>
                   <p className="text-sm font-bold text-gray-800">
                     Personalized productivity recommendations
@@ -1073,11 +990,10 @@ const ExtensionDashboard = () => {
                     </div>
                     <div>
                       <h4 className="font-black text-gray-900 mb-1">
-                        Focus on Development
+                        Self Development
                       </h4>
                       <p className="text-sm text-gray-700 leading-relaxed">
-                        Your GitHub and Stack Overflow time shows great
-                        engineering focus. Keep it up!
+                        Focus on development of yourself. Keep it up!
                       </p>
                     </div>
                   </div>
@@ -1093,8 +1009,8 @@ const ExtensionDashboard = () => {
                         Learning Time
                       </h4>
                       <p className="text-sm text-gray-700 leading-relaxed">
-                        Balance coding with learning. Try dedicating 30 minutes
-                        daily to tutorials.
+                        Balance learning and implementing it. Try dedicating 30
+                        minutes daily to tutorials.
                       </p>
                     </div>
                   </div>
@@ -1143,6 +1059,3 @@ const ExtensionDashboard = () => {
 };
 
 export default ExtensionDashboard;
-
-
-

@@ -42,7 +42,7 @@ const authSlice = createSlice({
     },
     setPrivacyPolicyAccepted: (state, action) => {
       state.privacyPolicyAccepted = action.payload;
-    }
+    },
   },
 });
 

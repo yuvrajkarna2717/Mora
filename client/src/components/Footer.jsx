@@ -1,7 +1,46 @@
 import { Link } from "react-router-dom";
 import { Mail, Twitter, Linkedin, Heart, Sparkles } from "lucide-react";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async () => {
+    if (!email) {
+      setMessage('Please enter your email address');
+      return;
+    }
+
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('http://localhost:3001/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setMessage('Successfully subscribed! 🎉');
+        setEmail('');
+      } else {
+        setMessage(data.message || 'Failed to subscribe');
+      }
+    } catch (error) {
+      setMessage('Failed to subscribe. Please try again.');
+    } finally {
+      setLoading(false);
+      setTimeout(() => setMessage(''), 5000);
+    }
+  };
+
   const scrollToTop = () => window.scrollTo(0, 0);
   return (
     <footer className="bg-amber-50 py-16 px-6 sm:px-8 md:px-12 lg:px-16 border-t-2 border-gray-900">
@@ -179,15 +218,29 @@ const Footer = () => {
             <div className="flex md:flex-row flex-col gap-3 w-full md:w-auto">
               <input
                 type="email"
-                placeholder="yuvrajkarna.code@gmail.com"
+                placeholder="your.email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSubscribe()}
                 className="px-4 py-3 rounded-lg border-2 border-gray-900 focus:ring-4 focus:ring-white focus:ring-opacity-50 outline-none font-semibold text-gray-900 flex-1 md:w-64"
               />
-              <button className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-amber-50 rounded-lg font-bold transition-all border-2 border-gray-900 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+              <button 
+                onClick={handleSubscribe}
+                disabled={loading}
+                className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-amber-50 rounded-lg font-bold transition-all border-2 border-gray-900 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50"
+              >
                 <Mail className="w-4 h-4" />
-                Subscribe
+                {loading ? 'Subscribing...' : 'Subscribe'}
               </button>
             </div>
           </div>
+          {message && (
+            <div className={`mt-4 text-center font-semibold ${
+              message.includes('Successfully') ? 'text-green-800' : 'text-red-800'
+            }`}>
+              {message}
+            </div>
+          )}
         </div>
 
         {/* Bottom Bar */}

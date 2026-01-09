@@ -17,6 +17,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PrivacyPolicyGuard from "./components/PrivacyPolicyGuard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthInitializer from "./components/AuthInitializer";
+import ScrollToTop from "./components/ScrollToTop";
 import LandingPage from "./pages/LandingPage";
 import FeedbackPage from "./pages/FeedbackPage";
 import BackupPage from "./pages/BackupPage";
@@ -26,6 +27,7 @@ function App() {
     <Provider store={store}>
       <AuthInitializer>
         <Router>
+          <ScrollToTop />
           <MainLayout>
             <Navbar />
             <Routes>
